@@ -1,27 +1,43 @@
 package org.ordereasy.models;
 
-import java.util.List;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+import java.util.Set;
+
+
+@Table(name = "role")
+@Entity
 public class Role {
-    private int IdRol;
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotBlank(message = "El nombre es requerido")
+    @Column(name = "name")
     private String Name;
 
-    private List<User> users;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<User> users;
 
     public Role() {
     }
 
-    public Role(int idRol, String name) {
-        IdRol = idRol;
+    public Role(Integer id, String name, Set<User> users) {
+        this.id = id;
         Name = name;
+        this.users = users;
     }
 
-    public int getIdRol() {
-        return IdRol;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdRol(int idRol) {
-        IdRol = idRol;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -30,6 +46,14 @@ public class Role {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }
 

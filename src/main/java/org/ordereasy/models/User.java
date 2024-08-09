@@ -1,29 +1,68 @@
 package org.ordereasy.models;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+
+@Table(name = "user")
+@Entity
 public class User {
-    private int IdUser;
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotBlank(message = "El nombre es requerido")
+    @Column(name = "name")
     private String Name;
+
+    @NotBlank(message = "El apellido es requerido")
+    @Column(name = "lastname")
     private String LastName;
+
+    @NotBlank(message = "El email es requerido")
+    @Column(name = "email")
     private String Email;
+
+    @NotBlank(message = "La contraseña es requerido")
+    @Column(name = "password")
     private String Password;
+
+    @NotBlank(message = "El telefono es requerido")
+    @Column(name = "phone")
     private String Phone;
+
+    @NotBlank(message = "El dirección es requerido")
+    @Column(name = "address")
     private String Address;
+
+    @NotBlank(message = "La fecha de nacimiento es requerido")
+    @Column(name = "registrationdate")
     private Date RegistrationDate;
+
+    @NotBlank(message = "El estado es requerido")
+    @Column(name = "state")
     private int State;
 
-    private Role roles;
-    private List<Order> orders;
-
+    @ManyToOne
+    @JoinColumn(name = "roleid",nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+    private Set<Order> orders;
+
 
     public User() {
     }
 
-    public User(int idUser, String name, String lastName, String email, String password, String phone, String address, Date registrationDate, int state, Role role) {
-        IdUser = idUser;
+    public User(Integer id, String name, String lastName, String email, String password, String phone, String address, Date registrationDate, int state, Role role, Set<Order> orders) {
+        this.id = id;
         Name = name;
         LastName = lastName;
         Email = email;
@@ -33,29 +72,30 @@ public class User {
         RegistrationDate = registrationDate;
         State = state;
         this.role = role;
+        this.orders = orders;
     }
 
-    public int getIdUser() {
-        return IdUser;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUser(int idUser) {
-        IdUser = idUser;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
+    public  String getName() {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName( String name) {
         Name = name;
     }
 
-    public String getLastName() {
+    public  String getLastName() {
         return LastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName( String lastName) {
         LastName = lastName;
     }
 
@@ -63,7 +103,7 @@ public class User {
         return Email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( String email) {
         Email = email;
     }
 
@@ -79,7 +119,7 @@ public class User {
         return Phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone( String phone) {
         Phone = phone;
     }
 
@@ -87,15 +127,15 @@ public class User {
         return Address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress( String address) {
         Address = address;
     }
 
-    public Date getRegistrationDate() {
+    public  Date getRegistrationDate() {
         return RegistrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate( Date registrationDate) {
         RegistrationDate = registrationDate;
     }
 
@@ -107,11 +147,19 @@ public class User {
         State = state;
     }
 
-    public Role getRole() {
+    public Role getRoles() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRoles(Role roles) {
         this.role = role;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -1,47 +1,84 @@
 package org.ordereasy.models;
 
-import java.util.List;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+import java.util.Set;
+
+
+@Entity
+@Table(name = "restaurant")
 public class Restaurant {
-    private int IdRestaurant;
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotBlank(message = "El nombre es requerido")
+    @Column(name = "name")
     private String Name;
+
+    @NotBlank(message = "La dirección es requerido")
+    @Column(name = "adress")
     private String Address;
+    @NotBlank(message = "El telefono es requerido")
+    @Column(name = "phone")
     private String Phone;
+
+    @NotBlank(message = "El horario es requerido")
+    @Column(name = "schedule")
     private String Schedule;
+
+    @NotBlank(message = "La descripción es requerida")
+    @Column(name = "descripcion")
     private String Description;
+
+    @NotBlank(message = "La imagen es requerida")
+    @Column(name = "image")
     private String Image;
+
+    @NotBlank(message = "El Logo es requerido")
+    @Column(name = "logo")
     private String Logo;
 
-    private List<Product> products;
+
+    @OneToMany(mappedBy = "orderid", cascade = CascadeType.ALL)
+    private Set<Order> orders;
+
+    @OneToMany(mappedBy = "productid", cascade = CascadeType.ALL)
+    private Set<Product> products;
+
 
 
     public Restaurant() {
     }
 
-    public Restaurant(int idRestaurant, String name, String address, String phone, String schedule, String description, String image, String logo) {
-        IdRestaurant = idRestaurant;
+    public Restaurant(Integer id, String name, String address, String schedule, String phone, String description, String image, String logo, Set<Product> products) {
+        this.id = id;
         Name = name;
         Address = address;
-        Phone = phone;
         Schedule = schedule;
+        Phone = phone;
         Description = description;
         Image = image;
         Logo = logo;
+        this.products = products;
     }
 
-    public int getIdRestaurant() {
-        return IdRestaurant;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdRestaurant(int idRestaurant) {
-        IdRestaurant = idRestaurant;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName( String name) {
         Name = name;
     }
 
@@ -49,35 +86,27 @@ public class Restaurant {
         return Address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress( String address) {
         Address = address;
     }
 
-    public String getPhone() {
+    public  String getPhone() {
         return Phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone( String phone) {
         Phone = phone;
     }
 
-    public String getSchedule() {
+    public  String getSchedule() {
         return Schedule;
     }
 
-    public void setSchedule(String schedule) {
+    public void setSchedule( String schedule) {
         Schedule = schedule;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getImage() {
+    public  String getImage() {
         return Image;
     }
 
@@ -85,11 +114,27 @@ public class Restaurant {
         Image = image;
     }
 
-    public String getLogo() {
+    public  String getDescription() {
+        return Description;
+    }
+
+    public void setDescription( String description) {
+        Description = description;
+    }
+
+    public  String getLogo() {
         return Logo;
     }
 
-    public void setLogo(String logo) {
+    public void setLogo( String logo) {
         Logo = logo;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

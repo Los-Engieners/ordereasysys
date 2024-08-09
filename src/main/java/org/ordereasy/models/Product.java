@@ -1,26 +1,56 @@
 package org.ordereasy.models;
-
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+
+
+@Table(name = "product")
+@Entity
 
 public class Product {
-    private int IdProduct;
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Integer id;
+    @NotBlank(message = "El nombre es requerido")
     private String Name;
+
+    @NotBlank(message = "La descripción es requerida")
     private String Description;
+
+    @NotBlank(message = "El precio es requerido")
     private Double Price;
+
+    @NotBlank(message = "La categoria es requerida")
     private String Category;
+
+    @NotBlank(message = "La imagen es requerida")
     private String Image1;
+
+    @NotBlank(message = "La imagen es requerida")
     private String Image2;
+
+    @NotBlank(message = "La imagen es requerida")
     private String Image3;
 
+
+    @ManyToOne
+    @JoinColumn(name = "restaurantid")
     private Restaurant restaurant;
-    private Restaurant restaurants;
-    private List<OrderDetail> orderDetails;
+
+    @OneToMany(mappedBy = "orderdetailid", cascade = CascadeType.ALL)
+    private Set<OrderDetail> orderDetails;
 
     public Product() {
     }
 
-    public Product(int idProduct, String name, String description, Double price, String category, String image1, String image2, String image3, Restaurant restaurant) {
-        IdProduct = idProduct;
+
+    public Product(Integer id, String name, String description, Double price, String category, String image1, String image2, String image3, Restaurant restaurant, Set<OrderDetail> orderDetails) {
+        this.id = id;
         Name = name;
         Description = description;
         Price = price;
@@ -29,45 +59,46 @@ public class Product {
         Image2 = image2;
         Image3 = image3;
         this.restaurant = restaurant;
+        this.orderDetails = orderDetails;
     }
 
-    public int getIdProduct() {
-        return IdProduct;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdProduct(int idProduct) {
-        IdProduct = idProduct;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName( String name) {
         Name = name;
     }
 
-    public String getDescription() {
+    public  String getDescription() {
         return Description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription( String description) {
         Description = description;
     }
 
-    public Double getPrice() {
+    public  Double getPrice() {
         return Price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice( Double price) {
         Price = price;
     }
 
-    public String getCategory() {
+    public  String getCategory() {
         return Category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory( String category) {
         Category = category;
     }
 
@@ -75,23 +106,23 @@ public class Product {
         return Image1;
     }
 
-    public void setImage1(String image1) {
+    public void setImage1( String image1) {
         Image1 = image1;
     }
 
-    public String getImage2() {
+    public  String getImage2() {
         return Image2;
     }
 
-    public void setImage2(String image2) {
+    public void setImage2( String image2) {
         Image2 = image2;
     }
 
-    public String getImage3() {
+    public  String getImage3() {
         return Image3;
     }
 
-    public void setImage3(String image3) {
+    public void setImage3( String image3) {
         Image3 = image3;
     }
 
@@ -101,5 +132,13 @@ public class Product {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

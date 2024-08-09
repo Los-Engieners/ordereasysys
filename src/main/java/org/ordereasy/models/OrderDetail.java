@@ -1,33 +1,60 @@
 package org.ordereasy.models;
 
-public class OrderDetail {
-    private int IdOrderDetail;
-    private int Amount;
-    private Double UnitPrice;
-    private Double Total;
-    private Order order;
-    private Product product;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.Set;
 
-    private Product products;
+
+@Table(name = "orderdetail")
+@Entity
+public class OrderDetail {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotBlank(message = "La cantidad es requerida")
+    @Column(name = "amount")
+    private int Amount;
+
+    @NotBlank(message = "El precio es requerido")
+    @Column(name = "unitprice")
+    private Double UnitPrice;
+
+    @NotBlank(message = "El total es requerido")
+    @Column(name = "total")
+    private Double Total;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "orderid",nullable = false)
+    private Order order;
+
+
+    @OneToMany(mappedBy = "productid", cascade = CascadeType.ALL)
+    private Set<Product> products;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int idOrderDetail, int amount, Double unitPrice, Double total, Order order, Product product) {
-        IdOrderDetail = idOrderDetail;
+    public OrderDetail(Integer id, int amount, Double unitPrice, Double total, Order order, Set<Product> products) {
+        this.id = id;
         Amount = amount;
         UnitPrice = unitPrice;
         Total = total;
         this.order = order;
-        this.product = product;
+        this.products = products;
     }
 
-    public int getIdOrderDetail() {
-        return IdOrderDetail;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdOrderDetail(int idOrderDetail) {
-        IdOrderDetail = idOrderDetail;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getAmount() {
@@ -62,12 +89,11 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
-
