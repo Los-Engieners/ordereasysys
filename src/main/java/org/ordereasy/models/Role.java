@@ -3,6 +3,7 @@ package org.ordereasy.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Role {
     @Column(name = "name")
     private String Name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users;
 
     public Role() {

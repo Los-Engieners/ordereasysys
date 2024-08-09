@@ -15,6 +15,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
     @NotBlank(message = "El nombre es requerido")
     private String Name;
@@ -39,10 +40,10 @@ public class Product {
 
 
     @ManyToOne
-    @JoinColumn(name = "restaurantid")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "orderdetailid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
     public Product() {

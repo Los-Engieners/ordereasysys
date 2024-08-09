@@ -33,18 +33,18 @@ public class Order {
     private Double Total;
 
 
-
-    @OneToMany(mappedBy = "orderdetail", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
 
 
+
     @ManyToOne
-    @JoinColumn(name = "userid",nullable = false)
+    @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "restaurantid",nullable = false)
+    @JoinColumn(name = "restaurant_id",nullable = false)
     private Restaurant restaurant;
 
 

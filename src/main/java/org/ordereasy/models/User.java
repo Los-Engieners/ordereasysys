@@ -51,10 +51,10 @@ public class User {
     private int State;
 
     @ManyToOne
-    @JoinColumn(name = "roleid",nullable = false)
+    @JoinColumn(name = "role_id",nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Order> orders;
 
 

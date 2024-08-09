@@ -30,11 +30,11 @@ public class OrderDetail {
 
 
     @ManyToOne
-    @JoinColumn(name = "orderid",nullable = false)
+    @JoinColumn(name = "order_id",nullable = false)
     private Order order;
 
 
-    @OneToMany(mappedBy = "productid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;
 
     public OrderDetail() {

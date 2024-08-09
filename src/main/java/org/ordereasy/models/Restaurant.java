@@ -43,10 +43,10 @@ public class Restaurant {
     private String Logo;
 
 
-    @OneToMany(mappedBy = "orderid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Order> orders;
 
-    @OneToMany(mappedBy = "productid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;
 
 
