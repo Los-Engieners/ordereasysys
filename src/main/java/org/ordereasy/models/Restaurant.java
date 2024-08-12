@@ -3,7 +3,6 @@ package org.ordereasy.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -20,7 +19,7 @@ public class Restaurant {
     private String Name;
 
     @NotBlank(message = "La dirección es requerido")
-    @Column(name = "adress")
+    @Column(name = "address")
     private String Address;
     @NotBlank(message = "El telefono es requerido")
     @Column(name = "phone")
@@ -44,7 +43,7 @@ public class Restaurant {
 
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private Set<Order> orders;
+    private Set<Ordr> ordrs;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 
@@ -55,13 +54,13 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Order> orders;
+    private Set<Ordr> ordrs;
 
 
     public User() {
     }
 
-    public User(Integer id, String name, String lastName, String email, String password, String phone, String address, Date registrationDate, int state, Role role, Set<Order> orders) {
+    public User(Integer id, String name, String lastName, String email, String password, String phone, String address, Date registrationDate, int state, Role role, Set<Ordr> ordrs) {
         this.id = id;
         Name = name;
         LastName = lastName;
@@ -72,7 +71,7 @@ public class User {
         RegistrationDate = registrationDate;
         State = state;
         this.role = role;
-        this.orders = orders;
+        this.ordrs = ordrs;
     }
 
     public Integer getId() {
@@ -155,11 +154,11 @@ public class User {
         this.role = role;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
+    public Set<Ordr> getOrders() {
+        return ordrs;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setOrders(Set<Ordr> ordrs) {
+        this.ordrs = ordrs;
     }
 }

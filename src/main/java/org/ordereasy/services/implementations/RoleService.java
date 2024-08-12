@@ -14,11 +14,11 @@ import java.util.Optional;
 @Service
 public class RoleService implements IRoleService {
     @Autowired
-    private IRoleRepository userrepository;
+    private IRoleRepository rolerepository;
 
     @Override
     public Page<Role> findAll(Pageable pageable) {
-        return null;
+        return rolerepository.findAll(pageable);
     }
 
     @Override

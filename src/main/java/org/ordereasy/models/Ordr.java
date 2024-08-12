@@ -3,13 +3,12 @@ package org.ordereasy.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 import java.util.Set;
 
 
-@Table(name = "order")
+@Table(name = "ordr")
 @Entity
-public class Order {
+public class Ordr {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -33,8 +32,8 @@ public class Order {
     private Double Total;
 
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Set<OrderDetail> orderDetails;
+    @OneToMany(mappedBy = "ordr", cascade = CascadeType.ALL)
+    private Set<OrdrDetail> ordrDetails;
 
 
 
@@ -50,10 +49,10 @@ public class Order {
 
 
 
-    public Order() {
+    public Ordr() {
     }
 
-    public Order(Integer id, String orderDate, String deliveryTime, String state, Double total, User user, Restaurant restaurant, Set<OrderDetail> orderDetails) {
+    public Ordr(Integer id, String orderDate, String deliveryTime, String state, Double total, User user, Restaurant restaurant, Set<OrdrDetail> ordrDetails) {
         this.id = id;
         OrderDate = orderDate;
         DeliveryTime = deliveryTime;
@@ -61,7 +60,7 @@ public class Order {
         Total = total;
         this.user = user;
         this.restaurant = restaurant;
-        this.orderDetails = orderDetails;
+        this.ordrDetails = ordrDetails;
     }
 
     public Integer getId() {
@@ -120,11 +119,11 @@ public class Order {
         this.restaurant = restaurant;
     }
 
-    public Set<OrderDetail> getOrderDetails() {
-        return orderDetails;
+    public Set<OrdrDetail> getOrdrDetails() {
+        return ordrDetails;
     }
 
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
+        this.ordrDetails = ordrDetails;
     }
 }

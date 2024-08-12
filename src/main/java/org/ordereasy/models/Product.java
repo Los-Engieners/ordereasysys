@@ -1,6 +1,4 @@
 package org.ordereasy.models;
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -17,25 +15,33 @@ public class Product {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
     @NotBlank(message = "El nombre es requerido")
+    @Column(name = "name")
     private String Name;
 
     @NotBlank(message = "La descripción es requerida")
+    @Column(name = "description")
     private String Description;
 
     @NotBlank(message = "El precio es requerido")
+    @Column(name = "price")
     private Double Price;
 
     @NotBlank(message = "La categoria es requerida")
+    @Column(name = "category")
     private String Category;
 
     @NotBlank(message = "La imagen es requerida")
+    @Column(name = "image1")
     private String Image1;
 
     @NotBlank(message = "La imagen es requerida")
+    @Column(name = "image2")
     private String Image2;
 
     @NotBlank(message = "La imagen es requerida")
+    @Column(name = "image3")
     private String Image3;
 
 
@@ -44,13 +50,13 @@ public class Product {
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private Set<OrderDetail> orderDetails;
+    private Set<OrdrDetail> ordrDetails;
 
     public Product() {
     }
 
 
-    public Product(Integer id, String name, String description, Double price, String category, String image1, String image2, String image3, Restaurant restaurant, Set<OrderDetail> orderDetails) {
+    public Product(Integer id, String name, String description, Double price, String category, String image1, String image2, String image3, Restaurant restaurant, Set<OrdrDetail> ordrDetails) {
         this.id = id;
         Name = name;
         Description = description;
@@ -60,7 +66,7 @@ public class Product {
         Image2 = image2;
         Image3 = image3;
         this.restaurant = restaurant;
-        this.orderDetails = orderDetails;
+        this.ordrDetails = ordrDetails;
     }
 
     public Integer getId() {
@@ -135,11 +141,11 @@ public class Product {
         this.restaurant = restaurant;
     }
 
-    public Set<OrderDetail> getOrderDetails() {
-        return orderDetails;
+    public Set<OrdrDetail> getOrderDetails() {
+        return ordrDetails;
     }
 
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrderDetails(Set<OrdrDetail> ordrDetails) {
+        this.ordrDetails = ordrDetails;
     }
 }

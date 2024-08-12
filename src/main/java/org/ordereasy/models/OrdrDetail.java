@@ -2,13 +2,13 @@ package org.ordereasy.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import java.util.List;
+
 import java.util.Set;
 
 
-@Table(name = "orderdetail")
+@Table(name = "ordrdetail")
 @Entity
-public class OrderDetail {
+public class OrdrDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,22 +30,22 @@ public class OrderDetail {
 
 
     @ManyToOne
-    @JoinColumn(name = "order_id",nullable = false)
-    private Order order;
+    @JoinColumn(name = "ordr_id",nullable = false)
+    private Ordr ordr;
 
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;
 
-    public OrderDetail() {
+    public OrdrDetail() {
     }
 
-    public OrderDetail(Integer id, int amount, Double unitPrice, Double total, Order order, Set<Product> products) {
+    public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Set<Product> products) {
         this.id = id;
         Amount = amount;
         UnitPrice = unitPrice;
         Total = total;
-        this.order = order;
+        this.ordr = ordr;
         this.products = products;
     }
 
@@ -81,12 +81,12 @@ public class OrderDetail {
         Total = total;
     }
 
-    public Order getOrder() {
-        return order;
+    public Ordr getOrdr() {
+        return ordr;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrdr(Ordr ordr) {
+        this.ordr = ordr;
     }
 
     public Set<Product> getProducts() {
