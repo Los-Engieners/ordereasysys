@@ -23,21 +23,21 @@ public class RoleService implements IRoleService {
 
     @Override
     public List<Role> getAll() {
-        return List.of();
+         return rolerepository.findAll();
     }
 
     @Override
     public Optional<Role> findOneById(Integer roleId) {
-        return Optional.empty();
+        return rolerepository.findById(roleId);
     }
 
     @Override
     public Role createOrEditOne(Role role) {
-        return null;
+        return rolerepository.save(role);
     }
 
     @Override
     public void deleteOneById(Integer roleId) {
-
+        rolerepository.deleteById(roleId);
     }
 }

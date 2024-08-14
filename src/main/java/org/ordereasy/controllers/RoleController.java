@@ -43,5 +43,52 @@ public class RoleController {
         }
 
         return "role/index";
+
+    }
+
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable("id") Integer id, Model model){
+        Role role = roleService.findOneById(id).get();
+        model.addAttribute("role", role);
+        return "role/details";
+    }
+
+    @GetMapping("/create")
+    public String create(Role role){
+        return "role/create";
+    }
+
+    @PostMapping("/save")
+    public String save(Role role, BindingResult result, Model model, RedirectAttributes attributes){
+        if(result.hasErrors()){
+            model.addAttribute(role);
+            attributes.addFlashAttribute("error", "No se pudo guardar debido a un error.");
+            return "role/create";
         }
+
+        roleService.createOrEditOne(role);
+        attributes.addFlashAttribute("msg", "Rol creado correctamente");
+        return "redirect:/role";
+    }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model){
+        Role role = roleService.findOneById(id).get();
+        model.addAttribute("role", role);
+        return "role/edit";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable("id") Integer id, Model model){
+        Role role = roleService.findOneById(id).get();
+        model.addAttribute("role", role);
+        return "role/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(Role role, RedirectAttributes attributes){
+        roleService.deleteOneById(role.getId());
+        attributes.addFlashAttribute("msg", "Rol eliminado correctamente");
+        return "redirect:/rol";
+    }
+
 }
