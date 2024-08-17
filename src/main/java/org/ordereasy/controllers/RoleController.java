@@ -89,7 +89,7 @@ public class RoleController {
     public String delete(Role role, RedirectAttributes attributes){
         roleService.deleteOneById(role.getId());
         attributes.addFlashAttribute("msg", "Rol eliminado correctamente");
-        return "redirect:/rol";
+        return "redirect:/role";
     }
 
 }
