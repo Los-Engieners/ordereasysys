@@ -1,0 +1,77 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+<div layout:fragment="content">
+    <h1>Crear nuevo usuario</h1>
+    <form th:action="@{/user/save}" th:object="${user}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lastname">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{lastname}" id="lastname" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="text" class="form-control" th:field="*{password}" id="password" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone">Telefono</label>
+                    <input type="text" class="form-control" th:field="*{phone}" id="phone" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="address">Direccion</label>
+                    <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="registrationdate">Fecha registro</label>
+                    <input type="text" class="form-control" th:field="*{registrationdate}" id="registrationdate" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="state">Estado</label>
+                    <input type="text" class="form-control" th:field="*{state}" id="state" placeholder="Escriba el nombre del usuario" required>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button> |
+        <a th:href="@{/user}">Regresar</a>
+    </form>
+</div>

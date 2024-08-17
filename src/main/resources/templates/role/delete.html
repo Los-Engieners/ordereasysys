@@ -10,9 +10,9 @@
         <hr />
         <dl class="row">
             <dt class = "col-sm-2" >ID</dt>
-            <dd class = "col-sm-10" th:text="${rol.id}"></dd>
+            <dd class = "col-sm-10" th:text="${role.id}"></dd>
             <dt class = "col-sm-2">Nombre</dt>
-            <dd class = "col-sm-10" th:text="${rol.name}"></dd>
+            <dd class = "col-sm-10" th:text="${role.name}"></dd>
         </dl>
 
         <form th:action="@{/role/delete}" method="post">

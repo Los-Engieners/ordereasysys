@@ -74,6 +74,7 @@ public class RoleController {
     public String edit(@PathVariable("id") Integer id, Model model){
         Role role = roleService.findOneById(id).get();
         model.addAttribute("role", role);
+
         return "role/edit";
     }
 

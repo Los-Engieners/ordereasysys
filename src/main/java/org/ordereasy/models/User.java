@@ -13,44 +13,44 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @NotBlank(message = "El nombre es requerido")
     @Column(name = "name")
-    private String Name;
+    private String name;
 
     @NotBlank(message = "El apellido es requerido")
     @Column(name = "lastname")
-    private String LastName;
+    private String lastname;
 
     @NotBlank(message = "El email es requerido")
     @Column(name = "email")
-    private String Email;
+    private String email;
 
     @NotBlank(message = "La contraseña es requerido")
     @Column(name = "password")
-    private String Password;
+    private String password;
 
     @NotBlank(message = "El telefono es requerido")
     @Column(name = "phone")
-    private String Phone;
+    private String phone;
 
     @NotBlank(message = "El dirección es requerido")
     @Column(name = "address")
-    private String Address;
+    private String address;
 
     @NotBlank(message = "La fecha de nacimiento es requerido")
     @Column(name = "registrationdate")
-    private Date RegistrationDate;
+    private Date registrationdate;
 
     @NotBlank(message = "El estado es requerido")
     @Column(name = "state")
-    private int State;
+    private int state;
 
     @ManyToOne
-    @JoinColumn(name = "role_id",nullable = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -60,16 +60,16 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String lastName, String email, String password, String phone, String address, Date registrationDate, int state, Role role, Set<Ordr> ordrs) {
+    public User(Integer id, String name, String lastname, String email, String password, String phone, String address, Date registrationdate, int state, Role role, Set<Ordr> ordrs) {
         this.id = id;
-        Name = name;
-        LastName = lastName;
-        Email = email;
-        Password = password;
-        Phone = phone;
-        Address = address;
-        RegistrationDate = registrationDate;
-        State = state;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.registrationdate = registrationdate;
+        this.state = state;
         this.role = role;
         this.ordrs = ordrs;
     }
@@ -82,83 +82,84 @@ public class User {
         this.id = id;
     }
 
-    public  String getName() {
-        return Name;
+    public @NotBlank(message = "El nombre es requerido") String getName() {
+        return name;
     }
 
-    public void setName( String name) {
-        Name = name;
+    public void setName(@NotBlank(message = "El nombre es requerido") String name) {
+        this.name = name;
     }
 
-    public  String getLastName() {
-        return LastName;
+    public @NotBlank(message = "El apellido es requerido") String getLastname() {
+        return lastname;
     }
 
-    public void setLastName( String lastName) {
-        LastName = lastName;
+    public void setLastname(@NotBlank(message = "El apellido es requerido") String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getEmail() {
-        return Email;
+    public @NotBlank(message = "El email es requerido") String getEmail() {
+        return email;
     }
 
-    public void setEmail( String email) {
-        Email = email;
+    public void setEmail(@NotBlank(message = "El email es requerido") String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return Password;
+    public @NotBlank(message = "La contraseña es requerido") String getPassword() {
+        return password;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPassword(@NotBlank(message = "La contraseña es requerido") String password) {
+        this.password = password;
     }
 
-    public String getPhone() {
-        return Phone;
+    public @NotBlank(message = "El telefono es requerido") String getPhone() {
+        return phone;
     }
 
-    public void setPhone( String phone) {
-        Phone = phone;
+    public void setPhone(@NotBlank(message = "El telefono es requerido") String phone) {
+        this.phone = phone;
     }
 
-    public String getAddress() {
-        return Address;
+    public @NotBlank(message = "El dirección es requerido") String getAddress() {
+        return address;
     }
 
-    public void setAddress( String address) {
-        Address = address;
+    public void setAddress(@NotBlank(message = "El dirección es requerido") String address) {
+        this.address = address;
     }
 
-    public  Date getRegistrationDate() {
-        return RegistrationDate;
+    public @NotBlank(message = "La fecha de nacimiento es requerido") Date getRegistrationdate() {
+        return registrationdate;
     }
 
-    public void setRegistrationDate( Date registrationDate) {
-        RegistrationDate = registrationDate;
+    public void setRegistrationdate(@NotBlank(message = "La fecha de nacimiento es requerido") Date registrationdate) {
+        this.registrationdate = registrationdate;
     }
 
+    @NotBlank(message = "El estado es requerido")
     public int getState() {
-        return State;
+        return state;
     }
 
-    public void setState(int state) {
-        State = state;
+    public void setState(@NotBlank(message = "El estado es requerido") int state) {
+        this.state = state;
     }
 
-    public Role getRoles() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRoles(Role roles) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public Set<Ordr> getOrders() {
+    public Set<Ordr> getOrdrs() {
         return ordrs;
     }
 
-    public void setOrders(Set<Ordr> ordrs) {
+    public void setOrdrs(Set<Ordr> ordrs) {
         this.ordrs = ordrs;
     }
 }

@@ -1,22 +1,21 @@
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layouts/_mainlayout" >
+      layout:decorate="/layouts/_mainlayout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div layout:fragment="content">
     <h1>Editar rol</h1>
     <form th:action="@{/role/save}" th:object="${role}" method="post">
-        <input type="hidden" th:field="*{id}">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Escriba el nombre del rol" required>
+                    <label for="Name">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{Name}" id="Name" placeholder="Escriba el nombre del rol" required>
                 </div>
             </div>
         </div>
         <hr>
         <button type="submit" class="btn btn-primary">Guardar cambios</button> |
-        <a th:href="@{/role">Regresar</a>
+
     </form>
 </div>
