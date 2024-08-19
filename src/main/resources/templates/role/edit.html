@@ -4,8 +4,11 @@
       layout:decorate="/layouts/_mainlayout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div layout:fragment="content">
+    <br>
+    <br>
     <h1>Editar rol</h1>
     <form th:action="@{/role/save}" th:object="${role}" method="post">
+        <input type="hidden" th:field="*{id}">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">

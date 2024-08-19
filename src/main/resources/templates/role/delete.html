@@ -4,6 +4,8 @@
       layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
+    <br>
+    <br>
     <h1>Eliminar rol</h1>
     <h3>¿Está seguro que desea eliminar este registro?</h3>
     <div>
@@ -18,7 +20,7 @@
         <form th:action="@{/role/delete}" method="post">
             <input type="hidden" name="Id" th:value="${role.id}">
             <input type="submit" value="Eliminar" class="btn btn-danger"> |
-            <a th:href="@{/role}">Regresar</a>
+            <a th:href="@{/role}" class="btn btn-outline-secondary">Regresar</a>
         </form>
 
     </div>

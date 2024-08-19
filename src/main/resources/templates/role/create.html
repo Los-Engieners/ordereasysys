@@ -4,6 +4,8 @@
       layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
+    <br>
+    <br>
     <h1>Crear nuevo Rol</h1>
     <form th:action="@{/role/save}" th:object="${role}" method="post">
         <div class="row">
@@ -16,6 +18,6 @@
         </div>
         <hr>
         <button type="submit" class="btn btn-primary">Guardar</button> |
-        <a th:href="@{/role}">Regresar</a>
+        <a th:href="@{/role}" class="btn btn-outline-secondary">Regresar</a>
     </form>
 </div>

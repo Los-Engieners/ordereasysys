@@ -4,7 +4,8 @@
       layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
-
+    <br>
+    <br>
     <h1>Detalles del Rol</h1>
     <div>
         <hr />
@@ -16,6 +17,6 @@
         </dl>
 
         <a th:href="@{/role/edit/{id} (id = ${role.id}) }" class="btn btn-outline-info">Editar</a> |
-        <a th:href="@{/role}">Regresar</a>
+        <a th:href="@{/role}" class="btn btn-outline-secondary">Regresar</a>
     </div>
 </div>
