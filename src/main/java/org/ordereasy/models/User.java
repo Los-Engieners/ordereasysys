@@ -2,8 +2,11 @@ package org.ordereasy.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -29,51 +32,53 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @NotBlank(message = "La contraseña es requerido")
+    @NotBlank(message = "La contraseña es requerida")
     @Column(name = "password")
     private String password;
 
-    @NotBlank(message = "El telefono es requerido")
+    @NotBlank(message = "El teléfono es requerido")
     @Column(name = "phone")
     private String phone;
 
-    @NotBlank(message = "El dirección es requerido")
+    @NotBlank(message = "La dirección es requerida")
     @Column(name = "address")
     private String address;
 
-    @NotBlank(message = "La fecha de nacimiento es requerido")
     @Column(name = "registrationdate")
-    private Date registrationdate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // Asegura el formato correcto en las solicitudes
+    @NotNull(message = "La fecha de registro es requerida")
+    private LocalDate registrationdate;
 
-    @NotBlank(message = "El estado es requerido")
+    @NotNull(message = "El estado es requerido")
     @Column(name = "state")
-    private int state;
+    private Integer state;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Ordr> ordrs;
 
+    // Constructor vacío
+    public User() {}
 
-    public User() {
-    }
-
-    public User(Integer id, String name, String lastname, String email, String password, String phone, String address, Date registrationdate, int state, Role role, Set<Ordr> ordrs) {
+    // Constructor con parámetros
+    public User(Integer id, String name, String lastname, String email, String password, String address, String phone, LocalDate registrationdate, Integer state, Role role, Set<Ordr> ordrs) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.phone = phone;
         this.address = address;
+        this.phone = phone;
         this.registrationdate = registrationdate;
         this.state = state;
         this.role = role;
         this.ordrs = ordrs;
     }
 
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -82,68 +87,67 @@ public class User {
         this.id = id;
     }
 
-    public @NotBlank(message = "El nombre es requerido") String getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(@NotBlank(message = "El nombre es requerido") String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public @NotBlank(message = "El apellido es requerido") String getLastname() {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(@NotBlank(message = "El apellido es requerido") String lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public @NotBlank(message = "El email es requerido") String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(@NotBlank(message = "El email es requerido") String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public @NotBlank(message = "La contraseña es requerido") String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotBlank(message = "La contraseña es requerido") String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public @NotBlank(message = "El telefono es requerido") String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(@NotBlank(message = "El telefono es requerido") String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public @NotBlank(message = "El dirección es requerido") String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(@NotBlank(message = "El dirección es requerido") String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public @NotBlank(message = "La fecha de nacimiento es requerido") Date getRegistrationdate() {
+    public LocalDate getRegistrationdate() {
         return registrationdate;
     }
 
-    public void setRegistrationdate(@NotBlank(message = "La fecha de nacimiento es requerido") Date registrationdate) {
+    public void setRegistrationdate(LocalDate registrationdate) {
         this.registrationdate = registrationdate;
     }
 
-    @NotBlank(message = "El estado es requerido")
-    public int getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(@NotBlank(message = "El estado es requerido") int state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

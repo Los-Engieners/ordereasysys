@@ -4,11 +4,31 @@
       layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+            title: "Confirmación",
+            text: '[[${msg}]]',
+            icon: "success"
+            });
+        </script>
+    </div>
+
+    <!-- Mostrar mensaje de error en caso de error -->
+    <div th:if="${error != null}">
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: '[[${error}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
     <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <br>
     <br>
     <h1>Listado de Roles</h1>
-        <a th:href="@{/role/create}" class="btn btn-outline-primary">Nuevo Rol</a>
+        <a th:href="@{/role/create}" class="btn btn-danger">Nuevo Rol</a>
     <table class="table table-striped">
         <thead>
         <tr>

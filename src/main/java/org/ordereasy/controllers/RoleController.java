@@ -70,6 +70,7 @@ public class RoleController {
         attributes.addFlashAttribute("msg", "Rol creado correctamente");
         return "redirect:/role";
     }
+
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
         Role role = roleService.findOneById(id).get();

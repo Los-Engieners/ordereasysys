@@ -1,6 +1,7 @@
 <html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+      layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
     <div th:if="${msg != null}">
@@ -23,9 +24,10 @@
             });
         </script>
     </div>
-
+    <br>
+    <br>
     <h1>Listado de productos</h1>
-    <a th:href="@{/products/create}" class="btn btn-outline-primary">Nuevo grupo</a>
+    <a th:href="@{/product/create}" class="btn btn-danger">Nuevo grupo</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -51,9 +53,9 @@
             <td th:text="${item.image2}"></td>
             <td th:text="${item.image3}"></td>
             <td>
-                <a th:href="@{/products/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/products/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
-                <a th:href="@{/products/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
+                <a th:href="@{/product/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
+                <a th:href="@{/product/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
+                <a th:href="@{/product/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
             </td>
         </tr>
         </tbody>
@@ -62,7 +64,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" th:each="pageNumber : ${pageNumbers}">
-                <a class="page-link" th:href="@{|/products?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+                <a class="page-link" th:href="@{|/product?page=${pageNumber}|}" th:text="${pageNumber}"></a>
             </li>
         </ul>
     </nav>

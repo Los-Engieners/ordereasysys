@@ -4,6 +4,7 @@
       layout:decorate="/layouts/_mainlayout" >
 
 <div layout:fragment="content">
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <div th:if="${msg != null}">
         <script>
             Swal.fire({
@@ -24,39 +25,32 @@
             });
         </script>
     </div>
-    <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <br>
     <br>
-    <h1>Listado de Usuarios</h1>
-    <a th:href="@{/user/create}" class="btn btn-danger">Nuevo usuario</a>
+    <h1>Listado de Restaurantes</h1>
+    <a th:href="@{/restaurant/create}" class="btn btn-danger">Nuevo Restaurante</a>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
-            <th>nombre</th>
-            <th>apellido</th>
-            <th>email</th>
-            <th>contraseña</th>
-            <th>telefono</th>
-            <th>direccion</th>
-            <th>fecha de registro</th>
-            <th>acciones</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Horario</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${users}">
+        <tr th:each="item : ${restaurants}">
             <td th:text="${item.id}"></td>
             <td th:text="${item.name}"></td>
-            <td th:text="${item.lastname}"></td>
-            <td th:text="${item.email}"></td>
-            <td th:text="${item.password}"></td>
-            <td th:text="${item.phone}"></td>
             <td th:text="${item.address}"></td>
-            <td th:text="${item.registrationdate}"></td>
+            <td th:text="${item.phone}"></td>
+            <td th:text="${item.schedule}"></td>
             <td>
-                <a th:href="@{/user/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/user/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
-                <a th:href="@{/user/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
+                <a th:href="@{/restaurant/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
+                <a th:href="@{/restaurant/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
+                <a th:href="@{/restaurant/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
             </td>
         </tr>
         </tbody>
@@ -65,7 +59,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" th:each="pageNumber : ${pageNumbers}">
-                <a class="page-link" th:href="@{|/user?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+                <a class="page-link" th:href="@{|/restaurant?page=${pageNumber}|}" th:text="${pageNumber}"></a>
             </li>
         </ul>
     </nav>

@@ -2,6 +2,7 @@ package org.ordereasy.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -37,16 +38,21 @@ public class OrdrDetail {
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;
 
+    @NotNull(message = "El estado es requerido")
+    @Column(name = "state")
+    private Integer State;
+
     public OrdrDetail() {
     }
 
-    public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Set<Product> products) {
+    public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Set<Product> products, Integer state) {
         this.id = id;
         Amount = amount;
         UnitPrice = unitPrice;
         Total = total;
         this.ordr = ordr;
         this.products = products;
+        State = state;
     }
 
     public Integer getId() {
@@ -57,27 +63,28 @@ public class OrdrDetail {
         this.id = id;
     }
 
+    @NotBlank(message = "La cantidad es requerida")
     public int getAmount() {
         return Amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(@NotBlank(message = "La cantidad es requerida") int amount) {
         Amount = amount;
     }
 
-    public Double getUnitPrice() {
+    public @NotBlank(message = "El precio es requerido") Double getUnitPrice() {
         return UnitPrice;
     }
 
-    public void setUnitPrice(Double unitPrice) {
+    public void setUnitPrice(@NotBlank(message = "El precio es requerido") Double unitPrice) {
         UnitPrice = unitPrice;
     }
 
-    public Double getTotal() {
+    public @NotBlank(message = "El total es requerido") Double getTotal() {
         return Total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(@NotBlank(message = "El total es requerido") Double total) {
         Total = total;
     }
 
@@ -95,5 +102,13 @@ public class OrdrDetail {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public @NotNull(message = "El estado es requerido") Integer getState() {
+        return State;
+    }
+
+    public void setState(@NotNull(message = "El estado es requerido") Integer state) {
+        State = state;
     }
 }

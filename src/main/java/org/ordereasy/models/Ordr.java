@@ -2,6 +2,7 @@ package org.ordereasy.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -31,12 +32,8 @@ public class Ordr {
     @Column(name = "total")
     private Double Total;
 
-
     @OneToMany(mappedBy = "ordr", cascade = CascadeType.ALL)
     private Set<OrdrDetail> ordrDetails;
-
-
-
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
@@ -46,21 +43,26 @@ public class Ordr {
     @JoinColumn(name = "restaurant_id",nullable = false)
     private Restaurant restaurant;
 
+    @NotNull(message = "El estado es requerido")
+    @Column(name = "estate")
+    private Integer Estate;
+
 
 
 
     public Ordr() {
     }
 
-    public Ordr(Integer id, String orderDate, String deliveryTime, String state, Double total, User user, Restaurant restaurant, Set<OrdrDetail> ordrDetails) {
+    public Ordr(Integer id, String deliveryTime, String orderDate, String state, Double total, Set<OrdrDetail> ordrDetails, User user, Restaurant restaurant, Integer estate) {
         this.id = id;
-        OrderDate = orderDate;
         DeliveryTime = deliveryTime;
+        OrderDate = orderDate;
         State = state;
         Total = total;
+        this.ordrDetails = ordrDetails;
         this.user = user;
         this.restaurant = restaurant;
-        this.ordrDetails = ordrDetails;
+        Estate = estate;
     }
 
     public Integer getId() {
@@ -71,43 +73,51 @@ public class Ordr {
         this.id = id;
     }
 
-    public  String getOrderDate() {
+    public @NotBlank(message = "La fecha de orden es requerida") String getOrderDate() {
         return OrderDate;
     }
 
-    public void setOrderDate( String orderDate) {
+    public void setOrderDate(@NotBlank(message = "La fecha de orden es requerida") String orderDate) {
         OrderDate = orderDate;
     }
 
-    public String getDeliveryTime() {
+    public @NotBlank(message = "El tiempo de entrega es requerido") String getDeliveryTime() {
         return DeliveryTime;
     }
 
-    public void setDeliveryTime( String deliveryTime) {
+    public void setDeliveryTime(@NotBlank(message = "El tiempo de entrega es requerido") String deliveryTime) {
         DeliveryTime = deliveryTime;
     }
 
-    public  String getState() {
+    public @NotBlank(message = "El estado es requerido") String getState() {
         return State;
     }
 
-    public void setState( String state) {
+    public void setState(@NotBlank(message = "El estado es requerido") String state) {
         State = state;
     }
 
-    public  Double getTotal() {
+    public @NotBlank(message = "El total es requerido") Double getTotal() {
         return Total;
     }
 
-    public void setTotal( Double total) {
+    public void setTotal(@NotBlank(message = "El total es requerido") Double total) {
         Total = total;
     }
 
-    public  User getUser() {
+    public Set<OrdrDetail> getOrdrDetails() {
+        return ordrDetails;
+    }
+
+    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
+        this.ordrDetails = ordrDetails;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser( User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -119,11 +129,11 @@ public class Ordr {
         this.restaurant = restaurant;
     }
 
-    public Set<OrdrDetail> getOrdrDetails() {
-        return ordrDetails;
+    public @NotNull(message = "El estado es requerido") Integer getEstate() {
+        return Estate;
     }
 
-    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
-        this.ordrDetails = ordrDetails;
+    public void setEstate(@NotNull(message = "El estado es requerido") Integer estate) {
+        Estate = estate;
     }
 }

@@ -3,7 +3,7 @@ import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.NotNull;
 
 
 @Table(name = "product")
@@ -45,9 +45,13 @@ public class Product {
     private String Image3;
 
 
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", referencedColumnName = "id", nullable = false)
     private Restaurant restaurant;
+
+    @NotNull(message = "El estado es requerido")
+    @Column(name = "state")
+    private Integer State;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<OrdrDetail> ordrDetails;
@@ -55,18 +59,26 @@ public class Product {
     public Product() {
     }
 
-
-    public Product(Integer id, String name, String description, Double price, String category, String image1, String image2, String image3, Restaurant restaurant, Set<OrdrDetail> ordrDetails) {
+    public Product(Integer id, String description, String name, Double price, String category, String image1, String image2, String image3, Restaurant restaurant, Integer state, Set<OrdrDetail> ordrDetails) {
         this.id = id;
-        Name = name;
         Description = description;
+        Name = name;
         Price = price;
         Category = category;
         Image1 = image1;
         Image2 = image2;
         Image3 = image3;
         this.restaurant = restaurant;
+        State = state;
         this.ordrDetails = ordrDetails;
+    }
+
+    public @NotBlank(message = "La descripción es requerida") String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(@NotBlank(message = "La descripción es requerida") String description) {
+        Description = description;
     }
 
     public Integer getId() {
@@ -77,59 +89,51 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
+    public @NotBlank(message = "El nombre es requerido") String getName() {
         return Name;
     }
 
-    public void setName( String name) {
+    public void setName(@NotBlank(message = "El nombre es requerido") String name) {
         Name = name;
     }
 
-    public  String getDescription() {
-        return Description;
-    }
-
-    public void setDescription( String description) {
-        Description = description;
-    }
-
-    public  Double getPrice() {
+    public @NotBlank(message = "El precio es requerido") Double getPrice() {
         return Price;
     }
 
-    public void setPrice( Double price) {
+    public void setPrice(@NotBlank(message = "El precio es requerido") Double price) {
         Price = price;
     }
 
-    public  String getCategory() {
+    public @NotBlank(message = "La categoria es requerida") String getCategory() {
         return Category;
     }
 
-    public void setCategory( String category) {
+    public void setCategory(@NotBlank(message = "La categoria es requerida") String category) {
         Category = category;
     }
 
-    public String getImage1() {
+    public @NotBlank(message = "La imagen es requerida") String getImage1() {
         return Image1;
     }
 
-    public void setImage1( String image1) {
+    public void setImage1(@NotBlank(message = "La imagen es requerida") String image1) {
         Image1 = image1;
     }
 
-    public  String getImage2() {
+    public @NotBlank(message = "La imagen es requerida") String getImage2() {
         return Image2;
     }
 
-    public void setImage2( String image2) {
+    public void setImage2(@NotBlank(message = "La imagen es requerida") String image2) {
         Image2 = image2;
     }
 
-    public  String getImage3() {
+    public @NotBlank(message = "La imagen es requerida") String getImage3() {
         return Image3;
     }
 
-    public void setImage3( String image3) {
+    public void setImage3(@NotBlank(message = "La imagen es requerida") String image3) {
         Image3 = image3;
     }
 
@@ -141,11 +145,19 @@ public class Product {
         this.restaurant = restaurant;
     }
 
-    public Set<OrdrDetail> getOrderDetails() {
+    public @NotNull(message = "El estado es requerido") Integer getState() {
+        return State;
+    }
+
+    public void setState(@NotNull(message = "El estado es requerido") Integer state) {
+        State = state;
+    }
+
+    public Set<OrdrDetail> getOrdrDetails() {
         return ordrDetails;
     }
 
-    public void setOrderDetails(Set<OrdrDetail> ordrDetails) {
+    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
         this.ordrDetails = ordrDetails;
     }
 }

@@ -16,6 +16,12 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <label for="state" class="form-label">Estado</label>
+            <select id="state" name="state" class="form-select" required>
+                <option th:each="i : ${#numbers.sequence(0,1)}" th:value="${i}" th:text="${i}"></option>
+            </select>
+        </div>
         <hr>
         <button type="submit" class="btn btn-primary">Guardar</button> |
         <a th:href="@{/role}" class="btn btn-outline-secondary">Regresar</a>

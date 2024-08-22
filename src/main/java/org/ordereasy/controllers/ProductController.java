@@ -1,7 +1,11 @@
 package org.ordereasy.controllers;
 
 import org.ordereasy.models.Product;
+import org.ordereasy.models.Restaurant;
+import org.ordereasy.models.User;
 import org.ordereasy.services.interfaces.IProductService;
+import org.ordereasy.services.interfaces.IRestaurantService;
+import org.ordereasy.services.interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +21,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Controller
+@RequestMapping("product")
 public class ProductController {
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private IRestaurantService restaurantService;
 
     @GetMapping
     public String index(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
@@ -49,29 +58,103 @@ public class ProductController {
     }
 
     @GetMapping("/create")
-    public String create(Product product){
+    public String create(Model model){
+        model.addAttribute("restaurants", restaurantService.getAll());
+        model.addAttribute("product", new Product());
         return "product/create";
     }
 
     @PostMapping("/save")
-    public String save(Product product, BindingResult result, Model model, RedirectAttributes attributes){
-        if(result.hasErrors()){
-            model.addAttribute(product);
-            attributes.addFlashAttribute("error", "No se pudo guardar debido a un error.");
-            return "product/create";
+    public String save(@RequestParam String name, @RequestParam String description,
+                       @RequestParam Double price, @RequestParam String category,
+                       @RequestParam String image1, @RequestParam String image2,
+                       @RequestParam String image3, @RequestParam Integer restaurant_id,
+                       @RequestParam Integer state, RedirectAttributes attributes) {
+
+        try {
+            // Buscar el restaurante por ID
+            Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
+
+            if (restaurant == null) {
+                attributes.addFlashAttribute("msg", "Restaurante no encontrado");
+                return "redirect:/product";
+            }
+
+            // Crear y configurar el producto
+            Product product = new Product();
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            product.setCategory(category);
+            product.setImage1(image1);
+            product.setImage2(image2);
+            product.setImage3(image3);
+            product.setRestaurant(restaurant);
+            product.setState(state);
+
+            // Guardar el producto
+            productService.createOrEditOne(product);
+            attributes.addFlashAttribute("msg", "Producto creado correctamente");
+
+        } catch (Exception e) {
+            // Manejo de excepciones
+            attributes.addFlashAttribute("msg", "Error al crear el producto: " + e.getMessage());
         }
 
-        productService.createOrEditOne(product);
-        attributes.addFlashAttribute("msg", "Producto creado correctamente");
-        return "redirect:/products";
+        return "redirect:/product";
     }
+
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
         Product product = productService.findOneById(id).get();
+        model.addAttribute("restaurants", restaurantService.getAll());
         model.addAttribute("product", product);
-        return "product/edit";
+
+        return "user/edit";
     }
+
+    @PostMapping("/update")
+    public String update(@RequestParam Integer id, @RequestParam String name, @RequestParam String description,
+                         @RequestParam Double price, @RequestParam String category,
+                         @RequestParam String image1, @RequestParam String image2,
+                         @RequestParam String image3, @RequestParam Integer restaurantId,
+                         @RequestParam Integer state, RedirectAttributes attributes) {
+
+        try {
+            // Buscar el restaurante por ID
+            Restaurant restaurant = restaurantService.findOneById(restaurantId).orElse(null);
+
+            if (restaurant == null) {
+                attributes.addFlashAttribute("msg", "Restaurante no encontrado");
+                return "redirect:/product";
+            }
+
+            // Crear una nueva instancia de Product o encontrar la existente
+            Product product = new Product();
+            product.setId(id);
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            product.setCategory(category);
+            product.setImage1(image1);
+            product.setImage2(image2);
+            product.setImage3(image3);
+            product.setRestaurant(restaurant);
+            product.setState(state);
+
+            // Guardar o actualizar el producto
+            productService.createOrEditOne(product);
+            attributes.addFlashAttribute("msg", "Producto modificado correctamente");
+
+        } catch (Exception e) {
+            // Manejo de excepciones
+            attributes.addFlashAttribute("msg", "Error al modificar el producto: " + e.getMessage());
+        }
+
+        return "redirect:/product";
+    }
+
 
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable("id") Integer id, Model model){
@@ -84,6 +167,6 @@ public class ProductController {
     public String delete(Product product, RedirectAttributes attributes){
         productService.deleteOneById(product.getId());
         attributes.addFlashAttribute("msg", "Producto eliminado correctamente");
-        return "redirect:/products";
+        return "redirect:/product";
     }
 }

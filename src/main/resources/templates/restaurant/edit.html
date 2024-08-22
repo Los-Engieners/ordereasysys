@@ -1,0 +1,61 @@
+<html lang="en"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content">
+    <br>
+    <br>
+    <h1>Editar usuario</h1>
+    <form th:action="@{/restaurant/update}" th:object="${restaurant}" method="post" class="row g-3">
+        <div class="mt-5 text-center ">
+            <h2 th:text="${titulo}">Editar Restaurante</h2>
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Escriba el nombre" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="address" class="form-label">Dirección</label>
+            <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Escriba el apellido" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="phone" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" th:field="*{phone}" id="phone" placeholder="Escriba el teléfono" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="schedule" class="form-label">Horario</label>
+            <input type="text" class="form-control" th:field="*{schedule}" id="schedule" placeholder="Escriba el horario" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="description" class="form-label">Descripción</label>
+            <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Escriba la descripción" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="image" class="form-label">Imagen</label>
+            <input type="text" class="form-control" th:field="*{image}" id="image"  required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="logo" class="form-label">Logo</label>
+            <input type="text" class="form-control" th:field="*{logo}" id="logo"  required>
+        </div>
+        <div class="col-md-6">
+            <label for="state" class="form-label">Estado</label>
+            <select id="state" name="state" class="form-select" required>
+                <option th:each="i : ${#numbers.sequence(0,1)}" th:value="${i}" th:text="${i}"></option>
+            </select>
+        </div>
+
+        <div class="col-lg-12 col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a th:href="@{/restaurant}" class="btn btn-secondary">Regresar</a>
+        </div>
+    </form>
+</div>
