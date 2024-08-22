@@ -1,0 +1,70 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+<div layout:fragment="content">
+    <br>
+    <br>
+    <h1>Crear nuevo producto</h1>
+    <form th:action="@{/product/save}" th:object="${product}" method="post" class="row g-3">
+        <div class="mt-5 text-center bg-light">
+            <h2 th:text="${titulo}">Formulario de Producto</h2>
+        </div>
+
+        <div class="col-md-6">
+            <label for="description" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Escriba la descripcion" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Escriba el nombre" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" class="form-control" th:field="*{price}" id="price" placeholder="Escriba el precio" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="category" class="form-label">Categoria</label>
+            <input type="text" class="form-control" th:field="*{category}" id="category" placeholder="Escriba la contraseña" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="image1" class="form-label">imagen1</label>
+            <input type="text" class="form-control" th:field="*{image1}" id="image1" placeholder="Escriba el teléfono" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="image2" class="form-label">imagen2</label>
+            <input type="text" class="form-control" th:field="*{image2}" id="image2" placeholder="Escriba el teléfono" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="image3" class="form-label">imagen3</label>
+            <input type="text" class="form-control" th:field="*{image3}" id="image3" placeholder="Escriba el teléfono" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="restaurant" class="form-label">Restaurante</label>
+            <select id="restaurant" name="restaurant_id" class="form-select" required>
+                <option th:each="restaurant : ${restaurants}" th:value="${restaurant.id}" th:text="${restaurant.name}"></option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="state" class="form-label">Estado</label>
+            <select id="state" name="state" class="form-select" required>
+                <option th:each="i : ${#numbers.sequence(0,1)}" th:value="${i}" th:text="${i}"></option>
+            </select>
+        </div>
+
+        <div class="col-lg-12 col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a th:href="@{/restaurant}" class="btn btn-secondary">Regresar</a>
+        </div>
+    </form>
+
+</div>

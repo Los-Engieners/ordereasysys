@@ -111,19 +111,19 @@ public class ProductController {
         model.addAttribute("restaurants", restaurantService.getAll());
         model.addAttribute("product", product);
 
-        return "user/edit";
+        return "product/edit";
     }
 
     @PostMapping("/update")
     public String update(@RequestParam Integer id, @RequestParam String name, @RequestParam String description,
                          @RequestParam Double price, @RequestParam String category,
                          @RequestParam String image1, @RequestParam String image2,
-                         @RequestParam String image3, @RequestParam Integer restaurantId,
+                         @RequestParam String image3, @RequestParam Integer restaurant_id,
                          @RequestParam Integer state, RedirectAttributes attributes) {
 
         try {
             // Buscar el restaurante por ID
-            Restaurant restaurant = restaurantService.findOneById(restaurantId).orElse(null);
+            Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
 
             if (restaurant == null) {
                 attributes.addFlashAttribute("msg", "Restaurante no encontrado");

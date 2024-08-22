@@ -4,6 +4,7 @@ import java.util.Set;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 
 @Table(name = "product")
@@ -24,7 +25,8 @@ public class Product {
     @Column(name = "description")
     private String Description;
 
-    @NotBlank(message = "El precio es requerido")
+    @NotNull(message = "El precio no puede ser nulo")
+    @Positive(message = "El precio debe ser mayor que cero")
     @Column(name = "price")
     private Double Price;
 
@@ -97,11 +99,11 @@ public class Product {
         Name = name;
     }
 
-    public @NotBlank(message = "El precio es requerido") Double getPrice() {
+    public  Double getPrice() {
         return Price;
     }
 
-    public void setPrice(@NotBlank(message = "El precio es requerido") Double price) {
+    public void setPrice( Double price) {
         Price = price;
     }
 

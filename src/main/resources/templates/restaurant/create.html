@@ -7,7 +7,7 @@
     <br>
     <br>
     <h1>Crear nuevo restaurante</h1>
-    <form th:action="@{/restaurant/save}" th:object="${restaurant}" method="post" class="row g-3">
+    <form th:action="@{/restaurant/save}" th:object="${restaurant}" enctype="multipart/form-data" method="post" class="row g-3">
         <div class="mt-5 text-center">
             <h2 th:text="${titulo}">Registro de Restaurante</h2>
         </div>
@@ -37,14 +37,13 @@
             <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Escriba la descripción" required>
         </div>
 
-        <div class="col-md-6">
-            <label for="image" class="form-label">Imagen</label>
-            <input type="text" class="form-control" th:field="*{image}" id="image"  required>
+        <div>
+            <label for="image" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="{image}"  id="image" type="text">
         </div>
-
-        <div class="col-md-6">
-            <label for="logo" class="form-label">Logo</label>
-            <input type="text" class="form-control" th:field="*{logo}" id="logo"  required>
+        <div>
+            <label for="logo" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="{logo}"  id="logo" type="text">
         </div>
         <div class="col-md-6">
             <label for="state" class="form-label">Estado</label>

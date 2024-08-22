@@ -37,6 +37,8 @@
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Horario</th>
+            <th>Imagen</th>
+            <th>Logo</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -47,6 +49,8 @@
             <td th:text="${item.address}"></td>
             <td th:text="${item.phone}"></td>
             <td th:text="${item.schedule}"></td>
+            <td><img th:src="${item.image}" width="300" height="200" alt=""></td>
+            <td><img th:src="${item.logo}" width="300" height="200" alt=""></td>
             <td>
                 <a th:href="@{/restaurant/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
                 <a th:href="@{/restaurant/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |

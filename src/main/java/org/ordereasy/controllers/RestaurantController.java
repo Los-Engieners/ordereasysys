@@ -13,8 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,6 +58,17 @@ public class RestaurantController {
         return "restaurant/details";
     }
 
+    private String guardarImagen(MultipartFile file) throws IOException {
+        if (file !=null && !file.isEmpty()) {
+
+            String nombreArchivo = file.getOriginalFilename();
+            String ruta = Paths.get("src/main/resources/static/img", nombreArchivo).toString();
+            Files.copy(file.getInputStream(), Paths.get(ruta), StandardCopyOption.REPLACE_EXISTING);
+            return "/img/" + nombreArchivo;
+        }
+        return null;
+    }
+
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("restaurant", new Restaurant());
@@ -62,11 +78,14 @@ public class RestaurantController {
     @PostMapping("/save")
     public String save(@RequestParam String name, @RequestParam String address,
                        @RequestParam String phone, @RequestParam String schedule,
-                       @RequestParam String description, @RequestParam String image,
-                       @RequestParam String logo, @RequestParam Integer state,
+                       @RequestParam String description, @RequestParam("image") MultipartFile file,
+                       @RequestParam("logo") MultipartFile file2, @RequestParam Integer state,
                        RedirectAttributes attributes) {
 
         try {
+
+            String url = guardarImagen(file);
+            String url2 = guardarImagen(file2);
 
             Restaurant restaurant = new Restaurant();
             restaurant.setName(name);
@@ -74,8 +93,8 @@ public class RestaurantController {
             restaurant.setPhone(phone);
             restaurant.setSchedule(schedule);
             restaurant.setDescription(description);
-            restaurant.setImage(image);
-            restaurant.setLogo(logo);
+            restaurant.setImage(url);
+            restaurant.setLogo(url2);
             restaurant.setState(state);
 
             // Guarda el restaurante
