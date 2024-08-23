@@ -14,8 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,6 +62,20 @@ public class ProductController {
         model.addAttribute("product", product);
         return "product/details";
     }
+    private String guardarImagen(MultipartFile file) throws IOException {
+        if (file != null && !file.isEmpty()) {
+            String nombreArchivo = file.getOriginalFilename();
+            Path ruta = Paths.get("src/main/resources/static/img").resolve(nombreArchivo);
+
+            Files.createDirectories(ruta.getParent());
+
+
+            Files.copy(file.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
+
+            return "/img/" + nombreArchivo;
+        }
+        return null;
+    }
 
     @GetMapping("/create")
     public String create(Model model){
@@ -65,34 +85,38 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(@RequestParam String name, @RequestParam String description,
-                       @RequestParam Double price, @RequestParam String category,
-                       @RequestParam String image1, @RequestParam String image2,
-                       @RequestParam String image3, @RequestParam Integer restaurant_id,
-                       @RequestParam Integer state, RedirectAttributes attributes) {
+    public String save(@ModelAttribute("product") Product product,
+                       @RequestParam("image1") MultipartFile file1,
+                       @RequestParam("image2") MultipartFile file2,
+                       @RequestParam("image3") MultipartFile file3,
+                       RedirectAttributes attributes) {
 
         try {
             // Buscar el restaurante por ID
-            Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
+            Restaurant restaurant = restaurantService.findOneById(product.getRestaurant().getId()).orElse(null);
 
             if (restaurant == null) {
                 attributes.addFlashAttribute("msg", "Restaurante no encontrado");
                 return "redirect:/product";
             }
 
-            // Crear y configurar el producto
-            Product product = new Product();
-            product.setName(name);
-            product.setDescription(description);
-            product.setPrice(price);
-            product.setCategory(category);
-            product.setImage1(image1);
-            product.setImage2(image2);
-            product.setImage3(image3);
-            product.setRestaurant(restaurant);
-            product.setState(state);
+            // Guardar imágenes si están presentes
+            String image1 = guardarImagen(file1);
+            String image2 = guardarImagen(file2);
+            String image3 = guardarImagen(file3);
 
-            // Guardar el producto
+            if (image1 != null) {
+                product.setImage1(image1);
+            }
+            if (image2 != null) {
+                product.setImage2(image2);
+            }
+            if (image3 != null) {
+                product.setImage3(image3);
+            }
+
+            // Asignar el restaurante y guardar el producto
+            product.setRestaurant(restaurant);
             productService.createOrEditOne(product);
             attributes.addFlashAttribute("msg", "Producto creado correctamente");
 
@@ -103,6 +127,7 @@ public class ProductController {
 
         return "redirect:/product";
     }
+
 
 
     @GetMapping("/edit/{id}")

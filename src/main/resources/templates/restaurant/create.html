@@ -6,7 +6,7 @@
 <div layout:fragment="content">
     <br>
     <br>
-    <h1>Crear nuevo restaurante</h1>
+    <h1 class="text-center">Crear nuevo restaurante</h1>
     <form th:action="@{/restaurant/save}" th:object="${restaurant}" enctype="multipart/form-data" method="post" class="row g-3">
         <div class="mt-5 text-center">
             <h2 th:text="${titulo}">Registro de Restaurante</h2>
@@ -36,21 +36,31 @@
             <label for="description" class="form-label">Descripción</label>
             <input type="text" class="form-control" th:field="*{description}" id="description" placeholder="Escriba la descripción" required>
         </div>
-
-        <div>
-            <label for="image" class="form-label">Seleciona la imagen</label>
-            <input class="form-control form-control-lg" th:field="{image}"  id="image" type="text">
-        </div>
-        <div>
-            <label for="logo" class="form-label">Seleciona la imagen</label>
-            <input class="form-control form-control-lg" th:field="{logo}"  id="logo" type="text">
-        </div>
         <div class="col-md-6">
             <label for="state" class="form-label">Estado</label>
             <select id="state" name="state" class="form-select" required>
                 <option th:each="i : ${#numbers.sequence(0,1)}" th:value="${i}" th:text="${i}"></option>
             </select>
         </div>
+
+        <div>
+            <label for="image" class="form-label">Selecciona la imagen</label>
+            <input class="form-control form-control-lg" name="image" id="image" type="file">
+            <div th:if="${restaurant.image}">
+                <p>Imagen cargada:</p>
+                <img th:src="@{/uploads/images/{image}(image=${restaurant.image})}" alt="Imagen del restaurante" style="max-width: 300px; margin-top: 10px;"/>
+            </div>
+        </div>
+
+        <div>
+            <label for="logo" class="form-label">Selecciona el logo</label>
+            <input class="form-control form-control-lg" name="logo" id="logo" type="file">
+            <div th:if="${restaurant.logo}">
+                <p>Logo cargado:</p>
+                <img th:src="@{/uploads/logos/{logo}(logo=${restaurant.logo})}" alt="Logo del restaurante" style="max-width: 300px; margin-top: 10px;"/>
+            </div>
+        </div>
+
 
         <div class="col-lg-12 col-12 text-center mt-3">
             <button type="submit" class="btn btn-primary">Guardar</button>

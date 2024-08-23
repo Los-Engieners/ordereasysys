@@ -27,7 +27,7 @@
     </div>
     <br>
     <br>
-    <h1>Listado de Restaurantes</h1>
+    <h1 class="text-center">Listado de Restaurantes</h1>
     <a th:href="@{/restaurant/create}" class="btn btn-danger">Nuevo Restaurante</a>
     <table class="table table-striped">
         <thead>
@@ -52,8 +52,8 @@
             <td><img th:src="${item.image}" width="300" height="200" alt=""></td>
             <td><img th:src="${item.logo}" width="300" height="200" alt=""></td>
             <td>
-                <a th:href="@{/restaurant/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/restaurant/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
+                <a th:href="@{/restaurant/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/restaurant/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a>
                 <a th:href="@{/restaurant/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
             </td>
         </tr>

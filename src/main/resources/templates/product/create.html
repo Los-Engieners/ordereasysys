@@ -6,7 +6,7 @@
 <div layout:fragment="content">
     <br>
     <br>
-    <h1>Crear nuevo producto</h1>
+    <h1 class="text-center">Crear nuevo producto</h1>
     <form th:action="@{/product/save}" th:object="${product}" method="post" class="row g-3">
         <div class="mt-5 text-center bg-light">
             <h2 th:text="${titulo}">Formulario de Producto</h2>
@@ -32,21 +32,31 @@
             <input type="text" class="form-control" th:field="*{category}" id="category" placeholder="Escriba la contraseña" required>
         </div>
 
-        <div class="col-md-6">
-            <label for="image1" class="form-label">imagen1</label>
-            <input type="text" class="form-control" th:field="*{image1}" id="image1" placeholder="Escriba el teléfono" required>
+        <div>
+            <label for="image1" class="form-label">Selecciona la imagen</label>
+            <input class="form-control form-control-lg" name="image1" id="image1" type="file">
+            <div th:if="${product.image1}">
+                <p>Imagen cargada:</p>
+                <img th:src="@{/uploads/images/{image}(image=${product.image1})}" alt="Imagen del producto" style="max-width: 300px; margin-top: 10px;"/>
+            </div>
         </div>
 
-        <div class="col-md-6">
-            <label for="image2" class="form-label">imagen2</label>
-            <input type="text" class="form-control" th:field="*{image2}" id="image2" placeholder="Escriba el teléfono" required>
+        <div>
+        <label for="image2" class="form-label">Selecciona la imagen</label>
+        <input class="form-control form-control-lg" name="image2" id="image2" type="file">
+        <div th:if="${product.image2}">
+            <p>Imagen cargada:</p>
+            <img th:src="@{/uploads/images/{image}(image=${product.image2})}" alt="Imagen del producto" style="max-width: 300px; margin-top: 10px;"/>
         </div>
-
-        <div class="col-md-6">
-            <label for="image3" class="form-label">imagen3</label>
-            <input type="text" class="form-control" th:field="*{image3}" id="image3" placeholder="Escriba el teléfono" required>
+    </div>
+        <div>
+            <label for="image3" class="form-label">Selecciona la imagen</label>
+            <input class="form-control form-control-lg" name="image3" id="image3" type="file">
+            <div th:if="${product.image3}">
+                <p>Imagen cargada:</p>
+                <img th:src="@{/uploads/images/{image}(image=${product.image3})}" alt="Imagen del restaurante" style="max-width: 300px; margin-top: 10px;"/>
+            </div>
         </div>
-
         <div class="col-md-6">
             <label for="restaurant" class="form-label">Restaurante</label>
             <select id="restaurant" name="restaurant_id" class="form-select" required>
@@ -63,7 +73,7 @@
 
         <div class="col-lg-12 col-12 text-center mt-3">
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <a th:href="@{/restaurant}" class="btn btn-secondary">Regresar</a>
+            <a th:href="@{/product}" class="btn btn-secondary">Regresar</a>
         </div>
     </form>
 

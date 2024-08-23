@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
@@ -59,18 +60,24 @@ public class RestaurantController {
     }
 
     private String guardarImagen(MultipartFile file) throws IOException {
-        if (file !=null && !file.isEmpty()) {
-
+        if (file != null && !file.isEmpty()) {
             String nombreArchivo = file.getOriginalFilename();
-            String ruta = Paths.get("src/main/resources/static/img", nombreArchivo).toString();
-            Files.copy(file.getInputStream(), Paths.get(ruta), StandardCopyOption.REPLACE_EXISTING);
+            Path ruta = Paths.get("src/main/resources/static/img").resolve(nombreArchivo);
+
+            Files.createDirectories(ruta.getParent());
+
+
+            Files.copy(file.getInputStream(), ruta, StandardCopyOption.REPLACE_EXISTING);
+
             return "/img/" + nombreArchivo;
         }
         return null;
     }
 
+
+
     @GetMapping("/create")
-    public String create(Model model){
+    public String create(Model model) {
         model.addAttribute("restaurant", new Restaurant());
         return "restaurant/create";
     }
@@ -83,9 +90,8 @@ public class RestaurantController {
                        RedirectAttributes attributes) {
 
         try {
-
-            String url = guardarImagen(file);
-            String url2 = guardarImagen(file2);
+            String imageUrl = guardarImagen(file);
+            String logoUrl = guardarImagen(file2);
 
             Restaurant restaurant = new Restaurant();
             restaurant.setName(name);
@@ -93,21 +99,20 @@ public class RestaurantController {
             restaurant.setPhone(phone);
             restaurant.setSchedule(schedule);
             restaurant.setDescription(description);
-            restaurant.setImage(url);
-            restaurant.setLogo(url2);
+            restaurant.setImage(imageUrl);
+            restaurant.setLogo(logoUrl);
             restaurant.setState(state);
 
-            // Guarda el restaurante
             restaurantService.createOrEditOne(restaurant);
             attributes.addFlashAttribute("msg", "Restaurante creado correctamente");
 
         } catch (Exception e) {
-            // Maneja la excepción y muestra el mensaje de error
             attributes.addFlashAttribute("msg", "Error al crear restaurante: " + e.getMessage());
         }
 
         return "redirect:/restaurant";
     }
+
 
 
     @GetMapping("/edit/{id}")

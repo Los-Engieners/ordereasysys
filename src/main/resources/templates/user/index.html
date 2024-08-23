@@ -27,20 +27,20 @@
     <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <br>
     <br>
-    <h1>Listado de Usuarios</h1>
+    <h1 class="text-center">Listado de Usuarios</h1>
     <a th:href="@{/user/create}" class="btn btn-danger">Nuevo usuario</a>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
-            <th>nombre</th>
-            <th>apellido</th>
-            <th>email</th>
-            <th>contraseña</th>
-            <th>telefono</th>
-            <th>direccion</th>
-            <th>fecha de registro</th>
-            <th>acciones</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Contraseña</th>
+            <th>Teléfono</th>
+            <th>Direccion</th>
+            <th>Fecha de registro</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -54,8 +54,8 @@
             <td th:text="${item.address}"></td>
             <td th:text="${item.registrationdate}"></td>
             <td>
-                <a th:href="@{/user/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/user/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
+                <a th:href="@{/user/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/user/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a>
                 <a th:href="@{/user/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
             </td>
         </tr>

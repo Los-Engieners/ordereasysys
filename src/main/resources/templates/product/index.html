@@ -26,7 +26,7 @@
     </div>
     <br>
     <br>
-    <h1>Listado de productos</h1>
+    <h1 class="text-center">Listado de productos</h1>
     <a th:href="@{/product/create}" class="btn btn-danger">Nuevo producto</a>
     <table class="table table-striped">
         <thead>
@@ -49,9 +49,9 @@
             <td th:text="${item.description}"></td>
             <td th:text="${item.price}"></td>
             <td th:text="${item.category}"></td>
-            <td th:text="${item.image1}"></td>
-            <td th:text="${item.image2}"></td>
-            <td th:text="${item.image3}"></td>
+            <td><img th:src="${item.image1}" width="300" height="200" alt=""></td>
+            <td><img th:src="${item.image2}" width="300" height="200" alt=""></td>
+            <td><img th:src="${item.image3}" width="300" height="200" alt=""></td>
             <td>
                 <a th:href="@{/product/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
                 <a th:href="@{/product/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
