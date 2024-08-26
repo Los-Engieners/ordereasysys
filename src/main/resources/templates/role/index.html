@@ -27,28 +27,41 @@
     <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <br>
     <br>
-    <h1 class="text-center">Listado de Roles</h1>
-        <a th:href="@{/role/create}" class="btn btn-danger">Nuevo Rol</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${roles}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
-            <td>
-                <a th:href="@{/role/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/role/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
-                <a th:href="@{/role/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-12 col-12 table-responsive">
+            <h1 class="text-center">Listado de Roles</h1>
+            <a th:href="@{/role/create}" class="btn btn-danger">Nuevo Rol</a>
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${roles}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td>
+                        <a th:href="@{/role/details/{id} (id = ${item.id}) }" class="btn btn-sm" style=" background-color: #95a3a2">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a th:href="@{/role/edit/{id} (id = ${item.id}) }" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/role/remove/{id} (id = ${item.id}) }" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">

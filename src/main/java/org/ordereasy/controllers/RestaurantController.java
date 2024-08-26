@@ -124,29 +124,36 @@ public class RestaurantController {
     }
 
     @PostMapping("/update")
-    public String update(@RequestParam Integer id, @RequestParam String name, @RequestParam String address,
-                         @RequestParam String phone, @RequestParam String schedule, @RequestParam String description,
-                         @RequestParam String image, @RequestParam String logo, @RequestParam Integer state,
-                         RedirectAttributes attributes) {
+    public String update(@RequestParam String name, @RequestParam String address,
+                       @RequestParam String phone, @RequestParam String schedule,
+                       @RequestParam String description, @RequestParam("image") MultipartFile file,
+                       @RequestParam("logo") MultipartFile file2, @RequestParam Integer state,
+                       RedirectAttributes attributes) {
 
-        // Crear una nueva instancia de Restaurant o encontrar la existente
-        Restaurant restaurant = new Restaurant();
-        restaurant.setId(id);
-        restaurant.setName(name);
-        restaurant.setAddress(address);
-        restaurant.setPhone(phone);
-        restaurant.setSchedule(schedule);
-        restaurant.setDescription(description);
-        restaurant.setImage(image);
-        restaurant.setLogo(logo);
-        restaurant.setState(state);
+        try {
+            String imageUrl = guardarImagen(file);
+            String logoUrl = guardarImagen(file2);
 
-        // Guardar o actualizar el restaurant
-        restaurantService.createOrEditOne(restaurant);
-        attributes.addFlashAttribute("msg", "Restaurante modificado correctamente");
+            Restaurant restaurant = new Restaurant();
+            restaurant.setName(name);
+            restaurant.setAddress(address);
+            restaurant.setPhone(phone);
+            restaurant.setSchedule(schedule);
+            restaurant.setDescription(description);
+            restaurant.setImage(imageUrl);
+            restaurant.setLogo(logoUrl);
+            restaurant.setState(state);
+
+            restaurantService.createOrEditOne(restaurant);
+            attributes.addFlashAttribute("msg", "Restaurante modificado correctamente");
+
+        } catch (Exception e) {
+            attributes.addFlashAttribute("msg", "Error al crear restaurante: " + e.getMessage());
+        }
 
         return "redirect:/restaurant";
     }
+
 
 
     @GetMapping("/remove/{id}")

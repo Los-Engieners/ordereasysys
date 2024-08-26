@@ -26,40 +26,54 @@
     </div>
     <br>
     <br>
-    <h1 class="text-center">Listado de productos</h1>
-    <a th:href="@{/product/create}" class="btn btn-danger">Nuevo producto</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Categoria</th>
-            <th>Imagen</th>
-            <th>Imagen</th>
-            <th>Imagen</th>
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-12 col-12 table-responsive">
+            <h1 class="text-center">Listado de productos</h1>
+            <a th:href="@{/product/create}" class="btn btn-danger">Nuevo producto</a>
+            <br>
+            <br>
+            <table class="table table-striped ">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Imagen</th>
+                    <th>Imagen</th>
+                    <th>Imagen</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${products}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.description}"></td>
-            <td th:text="${item.price}"></td>
-            <td th:text="${item.category}"></td>
-            <td><img th:src="${item.image1}" width="300" height="200" alt=""></td>
-            <td><img th:src="${item.image2}" width="300" height="200" alt=""></td>
-            <td><img th:src="${item.image3}" width="300" height="200" alt=""></td>
-            <td>
-                <a th:href="@{/product/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a> |
-                <a th:href="@{/product/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a> |
-                <a th:href="@{/product/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${products}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.description}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td th:text="${item.category}"></td>
+                    <td><img th:src="${item.image1}" width="150" height="150" alt=""></td>
+                    <td><img th:src="${item.image2}" width="150" height="150" alt=""></td>
+                    <td><img th:src="${item.image3}" width="150" height="150" alt=""></td>
+                    <td>
+                        <a th:href="@{/product/details/{id} (id = ${item.id}) }" class="btn btn-sm" style=" background-color: #95a3a2">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a th:href="@{/product/edit/{id} (id = ${item.id}) }" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/product/remove/{id} (id = ${item.id}) }" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
