@@ -85,38 +85,38 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("product") Product product,
-                       @RequestParam("image1") MultipartFile file1,
-                       @RequestParam("image2") MultipartFile file2,
-                       @RequestParam("image3") MultipartFile file3,
-                       RedirectAttributes attributes) {
+    public String save(@RequestParam String name, @RequestParam String description,
+                       @RequestParam Double price, @RequestParam String category,
+                       @RequestParam("image1") MultipartFile file1, @RequestParam("image2") MultipartFile file2,
+                       @RequestParam("image3") MultipartFile file3, @RequestParam Integer restaurant_id,
+                       @RequestParam Integer state, RedirectAttributes attributes) {
 
         try {
             // Buscar el restaurante por ID
-            Restaurant restaurant = restaurantService.findOneById(product.getRestaurant().getId()).orElse(null);
+            Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
 
             if (restaurant == null) {
                 attributes.addFlashAttribute("msg", "Restaurante no encontrado");
                 return "redirect:/product";
             }
 
-            // Guardar imágenes si están presentes
-            String image1 = guardarImagen(file1);
-            String image2 = guardarImagen(file2);
-            String image3 = guardarImagen(file3);
+            String image1Url = guardarImagen(file1);
+            String image2Url = guardarImagen(file2);
+            String image3Url = guardarImagen(file3);
 
-            if (image1 != null) {
-                product.setImage1(image1);
-            }
-            if (image2 != null) {
-                product.setImage2(image2);
-            }
-            if (image3 != null) {
-                product.setImage3(image3);
-            }
-
-            // Asignar el restaurante y guardar el producto
+            // Crear y configurar el producto
+            Product product = new Product();
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            product.setCategory(category);
+            product.setImage1(image1Url);
+            product.setImage2(image2Url);
+            product.setImage3(image3Url);
             product.setRestaurant(restaurant);
+            product.setState(state);
+
+            // Guardar el producto
             productService.createOrEditOne(product);
             attributes.addFlashAttribute("msg", "Producto creado correctamente");
 
@@ -142,8 +142,8 @@ public class ProductController {
     @PostMapping("/update")
     public String update(@RequestParam Integer id, @RequestParam String name, @RequestParam String description,
                          @RequestParam Double price, @RequestParam String category,
-                         @RequestParam String image1, @RequestParam String image2,
-                         @RequestParam String image3, @RequestParam Integer restaurant_id,
+                         @RequestParam("image1") MultipartFile file1, @RequestParam("image2") MultipartFile file2,
+                         @RequestParam("image3") MultipartFile file3, @RequestParam Integer restaurant_id,
                          @RequestParam Integer state, RedirectAttributes attributes) {
 
         try {
@@ -155,16 +155,33 @@ public class ProductController {
                 return "redirect:/product";
             }
 
-            // Crear una nueva instancia de Product o encontrar la existente
-            Product product = new Product();
-            product.setId(id);
+            // Buscar el producto por ID
+            Product product = productService.findOneById(id).orElse(null);
+
+            if (product == null) {
+                attributes.addFlashAttribute("msg", "Producto no encontrado");
+                return "redirect:/product";
+            }
+
+            // Guardar las nuevas imágenes si se han proporcionado
+            if (!file1.isEmpty()) {
+                String image1Url = guardarImagen(file1);
+                product.setImage1(image1Url);
+            }
+            if (!file2.isEmpty()) {
+                String image2Url = guardarImagen(file2);
+                product.setImage2(image2Url);
+            }
+            if (!file3.isEmpty()) {
+                String image3Url = guardarImagen(file3);
+                product.setImage3(image3Url);
+            }
+
+            // Actualizar los demás campos del producto
             product.setName(name);
             product.setDescription(description);
             product.setPrice(price);
             product.setCategory(category);
-            product.setImage1(image1);
-            product.setImage2(image2);
-            product.setImage3(image3);
             product.setRestaurant(restaurant);
             product.setState(state);
 
@@ -179,6 +196,7 @@ public class ProductController {
 
         return "redirect:/product";
     }
+
 
 
     @GetMapping("/remove/{id}")

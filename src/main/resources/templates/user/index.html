@@ -27,40 +27,54 @@
     <!-- Mostrar mensaje de confirmación en caso de éxito -->
     <br>
     <br>
-    <h1 class="text-center">Listado de Usuarios</h1>
-    <a th:href="@{/user/create}" class="btn btn-danger">Nuevo usuario</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Contraseña</th>
-            <th>Teléfono</th>
-            <th>Direccion</th>
-            <th>Fecha de registro</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${users}">
-            <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.lastname}"></td>
-            <td th:text="${item.email}"></td>
-            <td th:text="${item.password}"></td>
-            <td th:text="${item.phone}"></td>
-            <td th:text="${item.address}"></td>
-            <td th:text="${item.registrationdate}"></td>
-            <td>
-                <a th:href="@{/user/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a>
-                <a th:href="@{/user/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a>
-                <a th:href="@{/user/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-12 col-12 table-responsive">
+            <h1 class="text-center">Listado de Usuarios</h1>
+            <a th:href="@{/user/create}" class="btn btn-danger">Nuevo usuario</a>
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Contraseña</th>
+                    <th>Teléfono</th>
+                    <th>Direccion</th>
+                    <th>Fecha de registro</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${users}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.lastname}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.password}"></td>
+                    <td th:text="${item.phone}"></td>
+                    <td th:text="${item.address}"></td>
+                    <td th:text="${item.registrationdate}"></td>
+                    <td>
+                        <a th:href="@{/user/details/{id} (id = ${item.id}) }" class="btn btn-sm" style=" background-color: #95a3a2">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a th:href="@{/user/edit/{id} (id = ${item.id}) }" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/user/remove/{id} (id = ${item.id}) }" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">

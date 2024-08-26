@@ -6,10 +6,9 @@
 <div layout:fragment="content">
     <br>
     <br>
-    <h1 class="text-center">Editar nuevo producto</h1>
-    <form th:action="@{/product/update}" th:object="${product}" method="post" class="row g-3">
+    <form th:action="@{/product/update}" th:object="${product}" method="post" enctype="multipart/form-data" class="row g-3">
         <div class="mt-5 text-center">
-            <h2 th:text="${titulo}">Editar Producto</h2>
+            <h2 class="text-center bg-light">Editar Producto</h2>
         </div>
         <input type="hidden" th:field="*{id}">
         <div class="col-md-6">
@@ -32,19 +31,17 @@
             <input type="text" class="form-control" th:field="*{category}" id="category" placeholder="Escriba la contraseña" required>
         </div>
 
-        <div class="col-md-6">
-            <label for="image1" class="form-label">imagen1</label>
-            <input type="text" class="form-control" th:field="*{image1}" id="image1" placeholder="Escriba el teléfono" required>
+        <div>
+            <label for="image1" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image1}" accept="image/*" id="image1" type="file">
         </div>
-
-        <div class="col-md-6">
-            <label for="image2" class="form-label">imagen2</label>
-            <input type="text" class="form-control" th:field="*{image2}" id="image2" placeholder="Escriba el teléfono" required>
+        <div>
+            <label for="image2" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image2}" accept="image/*" id="image2" type="file">
         </div>
-
-        <div class="col-md-6">
-            <label for="image3" class="form-label">imagen3</label>
-            <input type="text" class="form-control" th:field="*{image3}" id="image3" placeholder="Escriba el teléfono" required>
+        <div>
+            <label for="image3" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image3}" accept="image/*" id="image3" type="file">
         </div>
 
         <div class="col-md-6">
@@ -62,8 +59,8 @@
         </div>
 
         <div class="col-lg-12 col-12 text-center mt-3">
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-            <a th:href="@{/restaurant}" class="btn btn-secondary">Regresar</a>
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <a th:href="@{/product}" class="btn btn-secondary">Regresar</a>
         </div>
     </form>
 

@@ -3638,15 +3638,39 @@ fieldset:disabled .btn {
 
 .btn-info {
   color: #616161;
-  background-color: #24FFEA;
-  border-color: #24FFEA;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
 }
 
 .btn-info:hover {
   color: #616161;
-  background-color: #45ffed;
-  border-color: #3affec;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
 }
+
+.btn-info {
+  color: #616161;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
+}
+
+.btn-info:hover {
+  color: #616161;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
+}
+.btn-gray {
+  color: #616161;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
+}
+
+.btn-gray:hover {
+  color: #616161;
+  background-color: #95a3a2;
+  border-color: #95a3a2;
+}
+
 
 .btn-check:focus + .btn-info, .btn-info:focus {
   color: #616161;

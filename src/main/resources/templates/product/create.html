@@ -7,8 +7,8 @@
     <br>
     <br>
     <h1 class="text-center">Crear nuevo producto</h1>
-    <form th:action="@{/product/save}" th:object="${product}" method="post" class="row g-3">
-        <div class="mt-5 text-center bg-light">
+    <form th:action="@{/product/save}" th:object="${product}" method="post" enctype="multipart/form-data" class="row g-3">
+        <div class="mt-5 text-center">
             <h2 th:text="${titulo}">Formulario de Producto</h2>
         </div>
 
@@ -28,35 +28,23 @@
         </div>
 
         <div class="col-md-6">
-            <label for="category" class="form-label">Categoria</label>
+            <label for="category" class="form-label">Categoría</label>
             <input type="text" class="form-control" th:field="*{category}" id="category" placeholder="Escriba la contraseña" required>
         </div>
 
         <div>
-            <label for="image1" class="form-label">Selecciona la imagen</label>
-            <input class="form-control form-control-lg" name="image1" id="image1" type="file">
-            <div th:if="${product.image1}">
-                <p>Imagen cargada:</p>
-                <img th:src="@{/uploads/images/{image}(image=${product.image1})}" alt="Imagen del producto" style="max-width: 300px; margin-top: 10px;"/>
-            </div>
+            <label for="image1" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image1}" accept="image/*" id="image1" type="file">
+        </div>
+        <div>
+            <label for="image2" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image2}" accept="image/*" id="image2" type="file">
+        </div>
+        <div>
+            <label for="image3" class="form-label">Seleciona la imagen</label>
+            <input class="form-control form-control-lg" th:field="*{image3}" accept="image/*" id="image3" type="file">
         </div>
 
-        <div>
-        <label for="image2" class="form-label">Selecciona la imagen</label>
-        <input class="form-control form-control-lg" name="image2" id="image2" type="file">
-        <div th:if="${product.image2}">
-            <p>Imagen cargada:</p>
-            <img th:src="@{/uploads/images/{image}(image=${product.image2})}" alt="Imagen del producto" style="max-width: 300px; margin-top: 10px;"/>
-        </div>
-    </div>
-        <div>
-            <label for="image3" class="form-label">Selecciona la imagen</label>
-            <input class="form-control form-control-lg" name="image3" id="image3" type="file">
-            <div th:if="${product.image3}">
-                <p>Imagen cargada:</p>
-                <img th:src="@{/uploads/images/{image}(image=${product.image3})}" alt="Imagen del restaurante" style="max-width: 300px; margin-top: 10px;"/>
-            </div>
-        </div>
         <div class="col-md-6">
             <label for="restaurant" class="form-label">Restaurante</label>
             <select id="restaurant" name="restaurant_id" class="form-select" required>
@@ -72,7 +60,7 @@
         </div>
 
         <div class="col-lg-12 col-12 text-center mt-3">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
             <a th:href="@{/product}" class="btn btn-secondary">Regresar</a>
         </div>
     </form>
