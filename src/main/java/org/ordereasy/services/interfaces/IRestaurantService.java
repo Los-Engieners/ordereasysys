@@ -1,7 +1,6 @@
 package org.ordereasy.services.interfaces;
 
 import org.ordereasy.models.Restaurant;
-import org.ordereasy.models.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

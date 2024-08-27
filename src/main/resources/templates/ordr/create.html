@@ -1,0 +1,61 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout">
+
+<div layout:fragment="content">
+    <br>
+    <br>
+    <form th:action="@{/ordr/save}" th:object="${ordr}" enctype="multipart/form-data" method="post" class="row g-3">
+        <div class="mt-5 text-center">
+            <h2 class="text-center bg-light">Registro de Orden</h2>
+        </div>
+
+        <div class="col-md-6">
+            <label for="ordrDate" class="form-label">Fecha de Orden</label>
+            <input type="date" class="form-control" th:field="*{ordrDate}" id="ordrDate" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="deliveryTime" class="form-label">Tiempo de Entrega</label>
+            <input type="text" class="form-control" th:field="*{deliveryTime}" id="deliveryTime" placeholder="Escriba el tiempo de entrega" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="state" class="form-label">Estado</label>
+            <input type="text" class="form-control" th:field="*{state}" id="state" placeholder="Escriba el estado de la orden" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="total" class="form-label">Total</label>
+            <input type="number" class="form-control" th:field="*{total}" id="total" placeholder="Escriba el total" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="user" class="form-label">Usuario</label>
+            <select id="user" name="user" th:field="*{user}" class="form-select" required>
+                <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="restaurant" class="form-label">Restaurante</label>
+            <select id="restaurant" name="restaurant" th:field="*{restaurant}" class="form-select" required>
+                <option th:each="r : ${restaurants}" th:value="${r.id}" th:text="${r.name}"></option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="estate" class="form-label">Estado de la Orden</label>
+            <select id="estate" name="estate" th:field="*{estate}" class="form-select" required>
+                <option th:each="i : ${#numbers.sequence(0,1)}" th:value="${i}" th:text="${i}"></option>
+            </select>
+        </div>
+
+        <div class="col-lg-12 col-12 text-center mt-3">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a th:href="@{/ordr}" class="btn btn-secondary">Regresar</a>
+        </div>
+    </form>
+</div>
+</html>

@@ -1,0 +1,47 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout">
+
+<div layout:fragment="content">
+    <br>
+    <br>
+    <h1 class="mb-4 text-center">Eliminar Orden</h1>
+    <h3 class="mb-4">¿Está seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">ID</dt>
+            <dd class="col-sm-10" th:text="${ordr.id}"></dd>
+
+            <dt class="col-sm-2">Fecha de Orden</dt>
+            <dd class="col-sm-10" th:text="${ordr.ordrDate}"></dd>
+
+            <dt class="col-sm-2">Tiempo de Entrega</dt>
+            <dd class="col-sm-10" th:text="${ordr.deliveryTime}"></dd>
+
+            <dt class="col-sm-2">Estado</dt>
+            <dd class="col-sm-10" th:text="${ordr.state}"></dd>
+
+            <dt class="col-sm-2">Total</dt>
+            <dd class="col-sm-10" th:text="${ordr.total}"></dd>
+
+            <dt class="col-sm-2">Usuario</dt>
+            <dd class="col-sm-10" th:text="${ordr.user.name}"></dd>
+
+            <dt class="col-sm-2">Restaurante</dt>
+            <dd class="col-sm-10" th:text="${ordr.restaurant.name}"></dd>
+
+            <dt class="col-sm-2">Estado de la Orden</dt>
+            <dd class="col-sm-10" th:text="${ordr.estate}"></dd>
+        </dl>
+
+        <form th:action="@{/ordr/delete}" method="post" class="mt-4">
+            <input type="hidden" name="id" th:value="${ordr.id}">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a th:href="@{/ordr}" class="btn btn-secondary">Regresar</a>
+        </form>
+    </div>
+
+</div>
+</html>

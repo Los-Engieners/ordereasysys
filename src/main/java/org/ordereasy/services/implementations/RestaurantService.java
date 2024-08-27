@@ -1,11 +1,8 @@
 package org.ordereasy.services.implementations;
 
 import org.ordereasy.models.Restaurant;
-import org.ordereasy.models.Role;
 import org.ordereasy.repository.IRestaurantRepository;
-import org.ordereasy.repository.IRoleRepository;
 import org.ordereasy.services.interfaces.IRestaurantService;
-import org.ordereasy.services.interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
