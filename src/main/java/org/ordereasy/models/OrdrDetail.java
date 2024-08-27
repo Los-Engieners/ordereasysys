@@ -1,11 +1,9 @@
 package org.ordereasy.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
-
 
 @Table(name = "ordrdetail")
 @Entity
@@ -16,43 +14,44 @@ public class OrdrDetail {
     @Column(name = "id")
     private Integer id;
 
-    @NotBlank(message = "La cantidad es requerida")
+    @NotNull(message = "La cantidad es requerida")
     @Column(name = "amount")
-    private int Amount;
+    private int amount;
 
-    @NotBlank(message = "El precio es requerido")
+    @NotNull(message = "El precio es requerido")
     @Column(name = "unitprice")
-    private Double UnitPrice;
+    private Double unitPrice;
 
-    @NotBlank(message = "El total es requerido")
+    @NotNull(message = "El total es requerido")
     @Column(name = "total")
-    private Double Total;
+    private Double total;
 
-
-
-    @ManyToOne
-    @JoinColumn(name = "ordr_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ordr_id", referencedColumnName = "id", nullable = false)
     private Ordr ordr;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
+    private Product  product;
+
+    @NotNull(message = "El estado es requerido")
+    @Column(name = "state")
+    private Integer state;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<Product> products;
 
-    @NotNull(message = "El estado es requerido")
-    @Column(name = "state")
-    private Integer State;
-
     public OrdrDetail() {
     }
 
-    public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Set<Product> products, Integer state) {
+    public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Product product, Integer state) {
         this.id = id;
-        Amount = amount;
-        UnitPrice = unitPrice;
-        Total = total;
+        this.amount = amount;
+        this.unitPrice = unitPrice;
+        this.total = total;
         this.ordr = ordr;
-        this.products = products;
-        State = state;
+        this.product = product;
+        this.state = state;
     }
 
     public Integer getId() {
@@ -63,29 +62,29 @@ public class OrdrDetail {
         this.id = id;
     }
 
-    @NotBlank(message = "La cantidad es requerida")
+    @NotNull(message = "La cantidad es requerida")
     public int getAmount() {
-        return Amount;
+        return amount;
     }
 
-    public void setAmount(@NotBlank(message = "La cantidad es requerida") int amount) {
-        Amount = amount;
+    public void setAmount(@NotNull(message = "La cantidad es requerida") int amount) {
+        this.amount = amount;
     }
 
-    public @NotBlank(message = "El precio es requerido") Double getUnitPrice() {
-        return UnitPrice;
+    public @NotNull(message = "El precio es requerido") Double getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setUnitPrice(@NotBlank(message = "El precio es requerido") Double unitPrice) {
-        UnitPrice = unitPrice;
+    public void setUnitPrice(@NotNull(message = "El precio es requerido") Double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    public @NotBlank(message = "El total es requerido") Double getTotal() {
-        return Total;
+    public @NotNull(message = "El total es requerido") Double getTotal() {
+        return total;
     }
 
-    public void setTotal(@NotBlank(message = "El total es requerido") Double total) {
-        Total = total;
+    public void setTotal(@NotNull(message = "El total es requerido") Double total) {
+        this.total = total;
     }
 
     public Ordr getOrdr() {
@@ -96,19 +95,19 @@ public class OrdrDetail {
         this.ordr = ordr;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public @NotNull(message = "El estado es requerido") Integer getState() {
-        return State;
+        return state;
     }
 
     public void setState(@NotNull(message = "El estado es requerido") Integer state) {
-        State = state;
+        this.state = state;
     }
 }

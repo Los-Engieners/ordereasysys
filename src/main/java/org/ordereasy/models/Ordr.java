@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.Set;
-
 
 @Table(name = "ordr")
 @Entity
@@ -16,53 +16,48 @@ public class Ordr {
     @Column(name = "id")
     private Integer id;
 
-    @NotBlank(message = "La fecha de orden es requerida")
+    @NotNull(message = "La fecha de orden es requerida")
     @Column(name = "orderdate")
-    private String OrderDate;
+    private LocalDate ordrDate;
 
     @NotBlank(message = "El tiempo de entrega es requerido")
     @Column(name = "deliverytime")
-    private String DeliveryTime;
+    private String deliveryTime;
 
     @NotBlank(message = "El estado es requerido")
     @Column(name = "state")
-    private String State;
+    private String state;
 
-    @NotBlank(message = "El total es requerido")
+    @NotNull(message = "El total es requerido")
     @Column(name = "total")
-    private Double Total;
-
-    @OneToMany(mappedBy = "ordr", cascade = CascadeType.ALL)
-    private Set<OrdrDetail> ordrDetails;
+    private Double total;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id",nullable = false)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
     @NotNull(message = "El estado es requerido")
     @Column(name = "estate")
-    private Integer Estate;
-
-
-
-
+    private Integer estate;
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private Set<OrdrDetail> ordrDetails;
     public Ordr() {
     }
 
-    public Ordr(Integer id, String deliveryTime, String orderDate, String state, Double total, Set<OrdrDetail> ordrDetails, User user, Restaurant restaurant, Integer estate) {
+    public Ordr(Integer id, LocalDate ordrDate, String deliveryTime, String state, Double total, Set<OrdrDetail> ordrDetails, User user, Restaurant restaurant, Integer estate) {
         this.id = id;
-        DeliveryTime = deliveryTime;
-        OrderDate = orderDate;
-        State = state;
-        Total = total;
+        this.ordrDate = ordrDate;
+        this.deliveryTime = deliveryTime;
+        this.state = state;
+        this.total = total;
         this.ordrDetails = ordrDetails;
         this.user = user;
         this.restaurant = restaurant;
-        Estate = estate;
+        this.estate = estate;
     }
 
     public Integer getId() {
@@ -73,44 +68,44 @@ public class Ordr {
         this.id = id;
     }
 
-    public @NotBlank(message = "La fecha de orden es requerida") String getOrderDate() {
-        return OrderDate;
+    public LocalDate getOrderDate() {
+        return ordrDate;
     }
 
-    public void setOrderDate(@NotBlank(message = "La fecha de orden es requerida") String orderDate) {
-        OrderDate = orderDate;
+    public void setOrderDate(LocalDate orderDate) {
+        this.ordrDate = orderDate;
     }
 
-    public @NotBlank(message = "El tiempo de entrega es requerido") String getDeliveryTime() {
-        return DeliveryTime;
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setDeliveryTime(@NotBlank(message = "El tiempo de entrega es requerido") String deliveryTime) {
-        DeliveryTime = deliveryTime;
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
-    public @NotBlank(message = "El estado es requerido") String getState() {
-        return State;
+    public String getState() {
+        return state;
     }
 
-    public void setState(@NotBlank(message = "El estado es requerido") String state) {
-        State = state;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public @NotBlank(message = "El total es requerido") Double getTotal() {
-        return Total;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setTotal(@NotBlank(message = "El total es requerido") Double total) {
-        Total = total;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
-    public Set<OrdrDetail> getOrdrDetails() {
+    public Set<OrdrDetail> getOrderDetails() {
         return ordrDetails;
     }
 
-    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
-        this.ordrDetails = ordrDetails;
+    public void setOrderDetails(Set<OrdrDetail> orderDetails) {
+        this.ordrDetails = orderDetails;
     }
 
     public User getUser() {
@@ -129,11 +124,11 @@ public class Ordr {
         this.restaurant = restaurant;
     }
 
-    public @NotNull(message = "El estado es requerido") Integer getEstate() {
-        return Estate;
+    public Integer getEstate() {
+        return estate;
     }
 
-    public void setEstate(@NotNull(message = "El estado es requerido") Integer estate) {
-        Estate = estate;
+    public void setEstate(Integer estate) {
+        this.estate = estate;
     }
 }

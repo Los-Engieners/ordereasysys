@@ -1,17 +1,13 @@
 package org.ordereasy.controllers;
 
 import org.ordereasy.models.Restaurant;
-import org.ordereasy.models.Role;
-import org.ordereasy.models.User;
 import org.ordereasy.services.interfaces.IRestaurantService;
-import org.ordereasy.services.interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
