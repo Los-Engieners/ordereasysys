@@ -64,7 +64,7 @@ public class OrderDetailController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("orders", ordrService.getAll());
+        model.addAttribute("ordrs", ordrService.getAll());
         model.addAttribute("products", productService.getAll());
         model.addAttribute("ordrdetail", new OrdrDetail());
         return "ordrdetail/create";
@@ -92,7 +92,7 @@ public class OrderDetailController {
 
             OrdrDetail ordrDetail = new OrdrDetail();
             ordrDetail.setAmount(amount);
-            ordrDetail.setUnitPrice(unitprice);
+            ordrDetail.setUnitprice(unitprice);
             ordrDetail.setTotal(total);
             ordrDetail.setOrdr(ordr);
             ordrDetail.setProduct(product);
@@ -115,7 +115,7 @@ public class OrderDetailController {
             model.addAttribute("msg", "Detalle de orden no encontrado");
             return "redirect:/ordrdetail";
         }
-        model.addAttribute("orders", ordrService.getAll());
+        model.addAttribute("ordrs", ordrService.getAll());
         model.addAttribute("products", productService.getAll());
         model.addAttribute("ordrdetail", ordrDetail);
 
@@ -148,7 +148,7 @@ public class OrderDetailController {
             }
 
             ordrDetail.setAmount(amount);
-            ordrDetail.setUnitPrice(unitprice);
+            ordrDetail.setUnitprice(unitprice);
             ordrDetail.setTotal(total);
             ordrDetail.setOrdr(ordr);
             ordrDetail.setProduct(product);

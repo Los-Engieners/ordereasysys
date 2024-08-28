@@ -42,8 +42,6 @@
             <dt class="col-sm-2">Estado</dt>
             <dd class="col-sm-10" th:text="${product.state}"></dd>
         </dl>
-
-        <a th:href="@{/product/edit/{id} (id = ${product.id}) }" class="btn btn-success">Editar</a>
         <a th:href="@{/product}" class="btn btn-secondary">Regresar</a>
     </div>
 

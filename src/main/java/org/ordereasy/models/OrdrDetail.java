@@ -20,7 +20,7 @@ public class OrdrDetail {
 
     @NotNull(message = "El precio es requerido")
     @Column(name = "unitprice")
-    private Double unitPrice;
+    private Double unitprice;
 
     @NotNull(message = "El total es requerido")
     @Column(name = "total")
@@ -47,7 +47,7 @@ public class OrdrDetail {
     public OrdrDetail(Integer id, int amount, Double unitPrice, Double total, Ordr ordr, Product product, Integer state) {
         this.id = id;
         this.amount = amount;
-        this.unitPrice = unitPrice;
+        this.unitprice = unitPrice;
         this.total = total;
         this.ordr = ordr;
         this.product = product;
@@ -69,13 +69,12 @@ public class OrdrDetail {
     public void setAmount( int amount) {
         this.amount = amount;
     }
-
-    public Double getUnitPrice() {
-        return unitPrice;
+    public Double getUnitprice() {
+        return unitprice;
     }
 
-    public void setUnitPrice( Double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitprice(Double unitprice) {
+        this.unitprice = unitprice;
     }
 
     public  Double getTotal() {

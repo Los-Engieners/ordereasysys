@@ -6,14 +6,14 @@
 <div layout:fragment="content">
     <br>
     <br>
-    <form th:action="@{/ordrdetail/save}" th:object="${ordrdetail}" enctype="multipart/form-data" method="post" class="row g-3">
+    <form th:action="@{/ordrdetail/save}" th:object="${ordrdetail}"  method="post" class="row g-3">
         <div class="mt-5 text-center">
-            <h2 class="text-center bg-light">Registro de un detalle de la orden </h2>
+            <h2 class="text-center bg-light">Crear de un detalle de la orden </h2>
         </div>
 
         <div class="col-md-6">
             <label for="amount" class="form-label">Cantidad</label>
-            <input type="number" class="form-control" th:field="*{amount }" id="amount" required>
+            <input type="number" class="form-control" th:field="*{amount}" id="amount" required>
         </div>
 
         <div class="col-md-6">
@@ -28,9 +28,9 @@
 
 
         <div class="col-md-6">
-            <label for="order" class="form-label">Orden</label>
-            <select id="order" name="order_id"  class="form-select" required>
-                <option th:each="order : ${orders}" th:value="${order.id}"></option>
+            <label for="ordr" class="form-label">Orden</label>
+            <select id="ordr" name="ordr_id"  class="form-select" required>
+                <option th:each="ordr : ${ordrs}" th:value="${ordr.id}" th:text="${ordr.id}"></option>
             </select>
         </div>
 
