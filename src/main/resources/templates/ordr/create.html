@@ -12,13 +12,13 @@
         </div>
 
         <div class="col-md-6">
-            <label for="ordrDate" class="form-label">Fecha de Orden</label>
-            <input type="date" class="form-control" th:field="*{ordrDate}" id="ordrDate" required>
+            <label for="ordrdate" class="form-label">Fecha de Orden</label>
+            <input type="date" class="form-control" th:field="*{ordrdate}" id="ordrdate" required>
         </div>
 
         <div class="col-md-6">
-            <label for="deliveryTime" class="form-label">Tiempo de Entrega</label>
-            <input type="text" class="form-control" th:field="*{deliveryTime}" id="deliveryTime" placeholder="Escriba el tiempo de entrega" required>
+            <label for="deliverytime" class="form-label">Tiempo de Entrega</label>
+            <input type="text" class="form-control" th:field="*{deliverytime}" id="deliverytime" placeholder="Escriba el tiempo de entrega" required>
         </div>
 
         <div class="col-md-6">
@@ -33,15 +33,15 @@
 
         <div class="col-md-6">
             <label for="user" class="form-label">Usuario</label>
-            <select id="user" name="user" th:field="*{user}" class="form-select" required>
-                <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+            <select id="user" name="user_id"  class="form-select" required>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
             </select>
         </div>
 
         <div class="col-md-6">
             <label for="restaurant" class="form-label">Restaurante</label>
-            <select id="restaurant" name="restaurant" th:field="*{restaurant}" class="form-select" required>
-                <option th:each="r : ${restaurants}" th:value="${r.id}" th:text="${r.name}"></option>
+            <select id="restaurant" name="restaurant_id" class="form-select" required>
+                <option th:each="restaurant : ${restaurants}" th:value="${restaurant.id}" th:text="${restaurant.name}"></option>
             </select>
         </div>
 

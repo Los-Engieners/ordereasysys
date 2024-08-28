@@ -12,17 +12,17 @@ import java.util.Set;
 public class Ordr {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "La fecha de orden es requerida")
     @Column(name = "orderdate")
-    private LocalDate ordrDate;
+    private LocalDate orderdate;
 
     @NotBlank(message = "El tiempo de entrega es requerido")
     @Column(name = "deliverytime")
-    private String deliveryTime;
+    private String deliverytime;
 
     @NotBlank(message = "El estado es requerido")
     @Column(name = "state")
@@ -43,21 +43,31 @@ public class Ordr {
     @NotNull(message = "El estado es requerido")
     @Column(name = "estate")
     private Integer estate;
+
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private Set<OrdrDetail> ordrDetails;
+
     public Ordr() {
     }
 
-    public Ordr(Integer id, LocalDate ordrDate, String deliveryTime, String state, Double total, Set<OrdrDetail> ordrDetails, User user, Restaurant restaurant, Integer estate) {
+    public Ordr(Integer id, LocalDate ordrdate, String deliverytime, String state, Double total, User user, Restaurant restaurant, Integer estate, Set<OrdrDetail> ordrDetails) {
         this.id = id;
-        this.ordrDate = ordrDate;
-        this.deliveryTime = deliveryTime;
+        this.orderdate = ordrdate;
+        this.deliverytime = deliverytime;
         this.state = state;
         this.total = total;
-        this.ordrDetails = ordrDetails;
         this.user = user;
         this.restaurant = restaurant;
         this.estate = estate;
+        this.ordrDetails = ordrDetails;
+    }
+
+    public  LocalDate getOrdrdate() {
+        return orderdate;
+    }
+
+    public void setOrdrdate(LocalDate ordrdate) {
+        this.orderdate = ordrdate;
     }
 
     public Integer getId() {
@@ -68,44 +78,28 @@ public class Ordr {
         this.id = id;
     }
 
-    public LocalDate getOrderDate() {
-        return ordrDate;
+    public  String getDeliverytime() {
+        return deliverytime;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.ordrDate = orderDate;
+    public void setDeliverytime(String deliverytime) {
+        this.deliverytime = deliverytime;
     }
 
-    public String getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(String deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-
-    public String getState() {
+    public  String getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState( String state) {
         this.state = state;
     }
 
-    public Double getTotal() {
+    public  Double getTotal() {
         return total;
     }
 
     public void setTotal(Double total) {
         this.total = total;
-    }
-
-    public Set<OrdrDetail> getOrderDetails() {
-        return ordrDetails;
-    }
-
-    public void setOrderDetails(Set<OrdrDetail> orderDetails) {
-        this.ordrDetails = orderDetails;
     }
 
     public User getUser() {
@@ -124,11 +118,19 @@ public class Ordr {
         this.restaurant = restaurant;
     }
 
-    public Integer getEstate() {
+    public  Integer getEstate() {
         return estate;
     }
 
     public void setEstate(Integer estate) {
         this.estate = estate;
+    }
+
+    public Set<OrdrDetail> getOrdrDetails() {
+        return ordrDetails;
+    }
+
+    public void setOrdrDetails(Set<OrdrDetail> ordrDetails) {
+        this.ordrDetails = ordrDetails;
     }
 }

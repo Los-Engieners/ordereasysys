@@ -32,7 +32,7 @@ public class OrdrDetail {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
-    private Product  product;
+    private Product product;
 
     @NotNull(message = "El estado es requerido")
     @Column(name = "state")
@@ -62,28 +62,27 @@ public class OrdrDetail {
         this.id = id;
     }
 
-    @NotNull(message = "La cantidad es requerida")
     public int getAmount() {
         return amount;
     }
 
-    public void setAmount(@NotNull(message = "La cantidad es requerida") int amount) {
+    public void setAmount( int amount) {
         this.amount = amount;
     }
 
-    public @NotNull(message = "El precio es requerido") Double getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(@NotNull(message = "El precio es requerido") Double unitPrice) {
+    public void setUnitPrice( Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public @NotNull(message = "El total es requerido") Double getTotal() {
+    public  Double getTotal() {
         return total;
     }
 
-    public void setTotal(@NotNull(message = "El total es requerido") Double total) {
+    public void setTotal( Double total) {
         this.total = total;
     }
 
@@ -103,11 +102,19 @@ public class OrdrDetail {
         this.product = product;
     }
 
-    public @NotNull(message = "El estado es requerido") Integer getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(@NotNull(message = "El estado es requerido") Integer state) {
+    public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

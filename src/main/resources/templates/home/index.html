@@ -67,6 +67,9 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/ordr}">Order</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/ordrdetail}">Detalles de la orden</a>
+                    </li>
                 </ul>
                 <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                     <div class="input-group-icon pe-2">
@@ -137,6 +140,22 @@
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${products}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td><img th:src="${item.image1}" width="150" height="150" alt=""></td>
+        </tr>
+        </tbody>
+    </table>
     <section class="py-0">
 
         <div class="container">

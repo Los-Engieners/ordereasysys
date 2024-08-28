@@ -30,41 +30,39 @@
     <div class="row justify-content-center mt-3">
         <div class="col-lg-12 col-12 table-responsive">
             <h1 class="text-center">Listado</h1>
-            <a th:href="@{/ordr/create}" class="btn btn-danger">Nueva orden</a>
+            <a th:href="@{/ordrdetail/create}" class="btn btn-danger">Detalles de la orden</a>
             <br>
             <br>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Detalles de la orden</th>
-                    <th>Tiempo de entrega</th>
-                    <th>Estado de la orden</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
                     <th>Total</th>
-                    <th>Usuario</th>
-                    <th>Restaurante</th>
+                    <th>Orden</th>
+                    <th>Producto</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="item : ${orders}">
+                <tr th:each="item : ${ordrDetails}">
                     <td th:text="${item.id}"></td>
-                    <td th:text="${item.ordrdate}"></td>
-                    <td th:text="${item.deliverytime}"></td>
-                    <td th:text="${item.state}"></td>
+                    <td th:text="${item.amount}"></td>
+                    <td th:text="${item.unitPrice}"></td>
                     <td th:text="${item.total}"></td>
-                    <td th:text="${item.user.name}"></td>
-                    <td th:text="${item.restaurant.name}"></td>
-                    <td th:text="${item.estate}"></td>
+                    <td th:text="${item.ordr.id}"></td>
+                    <td th:text="${item.product.name}"></td>
+                    <td th:text="${item.state}"></td>
                     <td>
-                        <a th:href="@{/ordr/details/{id} (id = ${item.id}) }" class="btn btn-sm" style=" background-color: #95a3a2">
+                        <a th:href="@{/ordrdetail/details/{id} (id = ${item.id}) }" class="btn btn-sm" style=" background-color: #95a3a2">
                             <i class="fas fa-info-circle"></i>
                         </a>
-                        <a th:href="@{/ordr/edit/{id} (id = ${item.id}) }" class="btn btn-primary btn-sm">
+                        <a th:href="@{/ordrdetail/edit/{id} (id = ${item.id}) }" class="btn btn-primary btn-sm">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a th:href="@{/ordr/remove/{id} (id = ${item.id}) }" class="btn btn-danger btn-sm">
+                        <a th:href="@{/ordrdetail/remove/{id} (id = ${item.id}) }" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash-alt"></i>
                         </a>
 
@@ -78,7 +76,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" th:each="pageNumber : ${pageNumbers}">
-                <a class="page-link" th:href="@{|/ordr?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+                <a class="page-link" th:href="@{|/ordrdetail?page=${pageNumber}|}" th:text="${pageNumber}"></a>
             </li>
         </ul>
     </nav>

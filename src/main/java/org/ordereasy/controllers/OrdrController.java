@@ -74,37 +74,37 @@ public class OrdrController {
     }
 
     @PostMapping("/save")
-    public String save(@RequestParam LocalDate ordrDate, @RequestParam String deliveryTime,
+    public String save(@RequestParam LocalDate ordrdate, @RequestParam String deliverytime,
                        @RequestParam String state, @RequestParam Double total, @RequestParam Integer user_id,
                        @RequestParam Integer restaurant_id, @RequestParam Integer estate,
                        RedirectAttributes attributes) {
 
         try {
-            // Buscar el usuario por ID
+
             User user = userService.findOneById(user_id).orElse(null);
             if (user == null) {
                 attributes.addFlashAttribute("msg", "Usuario no encontrado");
                 return "redirect:/ordr";
             }
 
-            // Buscar el restaurante por ID
+
             Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
             if (restaurant == null) {
                 attributes.addFlashAttribute("msg", "Restaurante no encontrado");
                 return "redirect:/ordr";
             }
 
-            // Crear y configurar la orden
+
             Ordr order = new Ordr();
-            order.setOrderDate(ordrDate);
-            order.setDeliveryTime(deliveryTime);
+            order.setOrdrdate(ordrdate);
+            order.setDeliverytime(deliverytime);
             order.setState(state);
             order.setTotal(total);
             order.setUser(user);
             order.setRestaurant(restaurant);
             order.setEstate(estate);
 
-            // Guardar la orden
+
             ordrService.createOrEditOne(order);
             attributes.addFlashAttribute("msg", "Orden creada correctamente");
 
@@ -130,43 +130,43 @@ public class OrdrController {
     }
 
     @PostMapping("/update")
-    public String update(@RequestParam Integer id, @RequestParam LocalDate ordrDate, @RequestParam String deliveryTime,
+    public String update(@RequestParam Integer id, @RequestParam LocalDate ordrdate, @RequestParam String deliverytime,
                          @RequestParam String state, @RequestParam Double total, @RequestParam Integer user_id,
                          @RequestParam Integer restaurant_id, @RequestParam Integer estate,
                          RedirectAttributes attributes) {
 
         try {
-            // Buscar el usuario por ID
+
             User user = userService.findOneById(user_id).orElse(null);
             if (user == null) {
                 attributes.addFlashAttribute("msg", "Usuario no encontrado");
                 return "redirect:/ordr";
             }
 
-            // Buscar el restaurante por ID
+
             Restaurant restaurant = restaurantService.findOneById(restaurant_id).orElse(null);
             if (restaurant == null) {
                 attributes.addFlashAttribute("msg", "Restaurante no encontrado");
                 return "redirect:/ordr";
             }
 
-            // Buscar la orden por ID
+
             Ordr ordr = ordrService.findOneById(id).orElse(null);
             if (ordr == null) {
                 attributes.addFlashAttribute("msg", "Orden no encontrada");
                 return "redirect:/ordr";
             }
 
-            // Actualizar los campos de la orden
-            ordr.setOrderDate(ordrDate);
-            ordr.setDeliveryTime(deliveryTime);
+
+            ordr.setOrdrdate(ordrdate);
+            ordr.setDeliverytime(deliverytime);
             ordr.setState(state);
             ordr.setTotal(total);
             ordr.setUser(user);
             ordr.setRestaurant(restaurant);
             ordr.setEstate(estate);
 
-            // Guardar o actualizar la orden
+            
             ordrService.createOrEditOne(ordr);
             attributes.addFlashAttribute("msg", "Orden modificada correctamente");
 
